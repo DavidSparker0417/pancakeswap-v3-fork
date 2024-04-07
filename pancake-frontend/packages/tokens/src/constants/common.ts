@@ -416,4 +416,5 @@ export const STABLE_COIN = {
   [ChainId.SEPOLIA]: USDC[ChainId.SEPOLIA],
   [ChainId.ARBITRUM_SEPOLIA]: USDC[ChainId.ARBITRUM_SEPOLIA],
   [ChainId.BASE_SEPOLIA]: USDC[ChainId.BASE_SEPOLIA],
+  [ChainId.PULSE_TESTNET]: USDC[ChainId.PULSE_TESTNET],
 } satisfies Record<ChainId, ERC20Token>
