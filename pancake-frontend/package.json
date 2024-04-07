@@ -39,7 +39,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm i --lockfile-only",
-    "release-packages": "turbo run build --filter=./packages/* && changeset version && changeset publish",
+    "release-packages": "turbo run build --filter=./packages/* && changeset version && changeset publish"
   },
   "engines": {
     "node": ">=16.0.0"
