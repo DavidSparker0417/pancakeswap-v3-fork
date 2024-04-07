@@ -20,14 +20,14 @@ export default {
   },
   SwapTwoPoolDeployer: {
     mainnet: "0xdDFCDAacC836dd5A1AE2D375fFb153cE59DD09ff",
-    // testnet: "0xE632CddfecfA6868B69207591f499bc88662C765", // pulse
+    // testnet: "0xE632CddfecfA6868B69207591f499bc88662C765", // pulse testnet
     // testnet: "0x61E860130f66a479a9C1B337E6f0a3ECeC2ef1f2", // bsc testnet
     testnet: "0x26eFDd7f16196fe9923970B7BB1A92E51e81d06B", // sepolia
     goerli: "0x2E564618dC39D2be3115dcF68b75e42bD8432087",
   },
   SwapThreePoolDeployer: {
     mainnet: "0x6AF7a605953C0B462EE9540217F5bD80878c6b2E",
-    //testnet: "0x2888836D1E69eDa2a5aB6ad1e2f849384D9D26Fc", // pulse
+    //testnet: "0x2888836D1E69eDa2a5aB6ad1e2f849384D9D26Fc", // pulse testnet
     // testnet: "0x19222BD13D6a3DBD56b0c8381A04a10cA9e461DF", // bsc testnet
     testnet: "0x143E744bdF83A587A214F15AaE4C8ADB616Fde8e", // sepolia
     goerli: "0x534F89508FAc4b486c090e407bE204D6AC0462C0",
