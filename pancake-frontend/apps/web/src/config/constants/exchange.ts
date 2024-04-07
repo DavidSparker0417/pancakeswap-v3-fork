@@ -19,9 +19,10 @@ import {
   opBnbTokens,
   polygonZkEvmTestnetTokens,
   polygonZkEvmTokens,
+  pulseTestnetTokens,
   scrollSepoliaTokens,
   zkSyncTestnetTokens,
-  zksyncTokens,
+  zksyncTokens
 } from '@pancakeswap/tokens'
 import { ChainTokenList } from './types'
 
@@ -29,7 +30,7 @@ export {
   ADDITIONAL_BASES,
   BASES_TO_CHECK_TRADES_AGAINST,
   CUSTOM_BASES,
-  V2_ROUTER_ADDRESS,
+  V2_ROUTER_ADDRESS
 } from '@pancakeswap/smart-router'
 
 export const CHAIN_REFRESH_TIME = {
@@ -53,6 +54,7 @@ export const CHAIN_REFRESH_TIME = {
   [ChainId.SEPOLIA]: 12_000,
   [ChainId.BASE_SEPOLIA]: 6_000,
   [ChainId.ARBITRUM_SEPOLIA]: 6_000,
+  [ChainId.PULSE_TESTNET]: 6_000,
 } as const satisfies Record<ChainId, number>
 
 // used for display in the default list when adding liquidity
@@ -75,6 +77,11 @@ export const SUGGESTED_BASES: ChainTokenList = {
     opBnbTestnetTokens.usdt,
     opBnbTestnetTokens.usdc,
     opBnbTestnetTokens.weth,
+  ],
+  [ChainId.PULSE_TESTNET]: [
+    pulseTestnetTokens.weth, 
+    pulseTestnetTokens.usdt, 
+    pulseTestnetTokens.usdc, 
   ],
   [ChainId.BASE]: [baseTokens.usdc, baseTokens.weth],
   [ChainId.BASE_TESTNET]: [baseTestnetTokens.usdc, baseTestnetTokens.weth],
@@ -106,6 +113,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.SEPOLIA]: [scrollSepoliaTokens.usdc, scrollSepoliaTokens.weth],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc, arbSepoliaTokens.weth],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc, baseSepoliaTokens.weth],
+  [ChainId.PULSE_TESTNET]: [pulseTestnetTokens.usdc, pulseTestnetTokens.weth],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {

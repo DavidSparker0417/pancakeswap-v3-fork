@@ -18,6 +18,7 @@ import {
   opBNBTestnet,
   polygonZkEvm,
   polygonZkEvmTestnet,
+  pulsechainV4,
   scrollSepolia,
   sepolia,
   zkSync,
@@ -72,6 +73,7 @@ export const L2_CHAIN_IDS: ChainId[] = [
   ChainId.OPBNB_TESTNET,
   ChainId.ARBITRUM_SEPOLIA,
   ChainId.BASE_SEPOLIA,
+  ChainId.PULSE_TESTNET,
 ]
 
 export const CHAINS = [
@@ -95,4 +97,5 @@ export const CHAINS = [
   opBNB,
   opBNBTestnet,
   scrollSepolia,
+  pulsechainV4,
 ]

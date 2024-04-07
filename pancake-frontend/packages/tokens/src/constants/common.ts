@@ -302,6 +302,13 @@ export const USDC = {
     'USDC',
     'USD Coin',
   ),
+  [ChainId.PULSE_TESTNET]: new ERC20Token(
+    ChainId.PULSE_TESTNET,
+    '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    6,
+    'USDC',
+    'USD Coin',
+  ),
   [ChainId.SEPOLIA]: new ERC20Token(
     ChainId.SEPOLIA,
     '0x6f14C02Fc1F78322cFd7d707aB90f18baD3B54f5',
@@ -359,6 +366,13 @@ export const USDT = {
   [ChainId.OPBNB_TESTNET]: new ERC20Token(
     ChainId.OPBNB_TESTNET,
     '0xCF712f20c85421d00EAa1B6F6545AaEEb4492B75',
+    6,
+    'USDT',
+    'Tether USD',
+  ),
+  [ChainId.PULSE_TESTNET]: new ERC20Token(
+    ChainId.PULSE_TESTNET,
+    '0xdAC17F958D2ee523a2206206994597C13D831ec7',
     6,
     'USDT',
     'Tether USD',
