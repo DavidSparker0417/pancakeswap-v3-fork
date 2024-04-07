@@ -40,7 +40,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm i --lockfile-only",
     "release-packages": "turbo run build --filter=./packages/* && changeset version && changeset publish",
-    "prepare": "husky install"
+    "prepare": "npx husky install"
   },
   "engines": {
     "node": ">=16.0.0"
