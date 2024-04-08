@@ -304,7 +304,7 @@ export const USDC = {
   ),
   [ChainId.PULSE_TESTNET]: new ERC20Token(
     ChainId.PULSE_TESTNET,
-    '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    '0x12Ab8B560FAFe099e1CCc836cbbc2286EDe7905f',
     6,
     'USDC',
     'USD Coin',

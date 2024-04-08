@@ -10,6 +10,7 @@ import {
   lineaTokens,
   opBnbTokens,
   polygonZkEvmTokens,
+  pulseTestnetTokens,
   zkSyncTestnetTokens,
   zksyncTokens,
 } from '@pancakeswap/tokens'
@@ -56,6 +57,10 @@ export const priceHelperTokens = {
     chain: 'opbnb',
     list: [opBnbTokens.wbnb, opBnbTokens.usdt],
   },
+  [ChainId.PULSE_TESTNET]: {
+    chain: 'pulseTestnet',
+    list: [pulseTestnetTokens.weth, pulseTestnetTokens.usdt],
+  },
 } satisfies Record<number, PriceHelper>
 
 // for testing purposes
@@ -82,4 +87,5 @@ export const DEFAULT_COMMON_PRICE: Record<FarmV3SupportedChainId, CommonPrice> =
   [ChainId.BASE]: {},
   [ChainId.OPBNB_TESTNET]: {},
   [ChainId.OPBNB]: {},
+  [ChainId.PULSE_TESTNET]: {},
 }

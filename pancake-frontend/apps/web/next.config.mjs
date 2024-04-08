@@ -72,14 +72,16 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    contentDispositionType: 'attachment',
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'static-nft.pancakeswap.com',
-        pathname: '/mainnet/**',
-      },
-    ],
+    loader: 'imgix',
+    path: 'https://pancakev3.metabest.tech/',
+    // contentDispositionType: 'attachment',
+    // remotePatterns: [
+    //   {
+    //     protocol: 'https',
+    //     hostname: 'static-nft.pancakeswap.com',
+    //     pathname: '/mainnet/**',
+    //   },
+    // ],
   },
   async rewrites() {
     return [
