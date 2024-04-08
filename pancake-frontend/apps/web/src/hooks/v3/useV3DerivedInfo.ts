@@ -115,7 +115,6 @@ export default function useV3DerivedInfo(
 
   // pool
   const [poolState, pool] = usePool(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B], feeAmount)
-  console.log(`[DAVID] poolState = ${poolState}`);
   const noLiquidity = poolState === PoolState.NOT_EXISTS
 
   // note to parse inputs in reverse
@@ -131,11 +130,11 @@ export default function useV3DerivedInfo(
         const p =
           baseAmount && parsedQuoteAmount
             ? new Price(
-                baseAmount.currency,
-                parsedQuoteAmount.currency,
-                baseAmount.quotient,
-                parsedQuoteAmount.quotient,
-              )
+              baseAmount.currency,
+              parsedQuoteAmount.currency,
+              baseAmount.quotient,
+              parsedQuoteAmount.quotient,
+            )
             : undefined
         return (invertPrice ? p?.invert() : p) ?? undefined
       }
@@ -187,23 +186,23 @@ export default function useV3DerivedInfo(
           ? existingPosition.tickLower
           : (invertPrice && typeof rightRangeTypedValue === 'boolean') ||
             (!invertPrice && typeof leftRangeTypedValue === 'boolean')
-          ? tickSpaceLimits[Bound.LOWER]
             ? tickSpaceLimits[Bound.LOWER]
-            : tickSpaceLimits[Bound.LOWER]
-          : invertPrice
-          ? tryParseTick(feeAmount, rightRangeTypedValue)
-          : tryParseTick(feeAmount, leftRangeTypedValue),
+              ? tickSpaceLimits[Bound.LOWER]
+              : tickSpaceLimits[Bound.LOWER]
+            : invertPrice
+              ? tryParseTick(feeAmount, rightRangeTypedValue)
+              : tryParseTick(feeAmount, leftRangeTypedValue),
       [Bound.UPPER]:
         typeof existingPosition?.tickUpper === 'number'
           ? checkAndParseMaxTick(existingPosition.tickUpper)
           : (!invertPrice && typeof rightRangeTypedValue === 'boolean') ||
             (invertPrice && typeof leftRangeTypedValue === 'boolean')
-          ? tickSpaceLimits[Bound.UPPER]
-            ? checkAndParseMaxTick(tickSpaceLimits[Bound.UPPER])
-            : tickSpaceLimits[Bound.UPPER]
-          : invertPrice
-          ? tryParseTick(feeAmount, leftRangeTypedValue)
-          : tryParseTick(feeAmount, rightRangeTypedValue),
+            ? tickSpaceLimits[Bound.UPPER]
+              ? checkAndParseMaxTick(tickSpaceLimits[Bound.UPPER])
+              : tickSpaceLimits[Bound.UPPER]
+            : invertPrice
+              ? tryParseTick(feeAmount, leftRangeTypedValue)
+              : tryParseTick(feeAmount, rightRangeTypedValue),
     }
   }, [existingPosition, feeAmount, invertPrice, leftRangeTypedValue, rightRangeTypedValue, tickSpaceLimits])
 
@@ -259,18 +258,18 @@ export default function useV3DerivedInfo(
 
       const position: Position | undefined = wrappedIndependentAmount.currency.equals(poolForPosition.token0)
         ? Position.fromAmount0({
-            pool: poolForPosition,
-            tickLower,
-            tickUpper,
-            amount0: independentAmount.quotient,
-            useFullPrecision: true, // we want full precision for the theoretical position
-          })
+          pool: poolForPosition,
+          tickLower,
+          tickUpper,
+          amount0: independentAmount.quotient,
+          useFullPrecision: true, // we want full precision for the theoretical position
+        })
         : Position.fromAmount1({
-            pool: poolForPosition,
-            tickLower,
-            tickUpper,
-            amount1: independentAmount.quotient,
-          })
+          pool: poolForPosition,
+          tickLower,
+          tickUpper,
+          amount1: independentAmount.quotient,
+        })
 
       const dependentTokenAmount = wrappedIndependentAmount.currency.equals(poolForPosition.token0)
         ? position.amount1
@@ -311,13 +310,13 @@ export default function useV3DerivedInfo(
     invalidRange ||
     Boolean(
       (deposit0Disabled && poolForPosition && tokenA && poolForPosition.token0.equals(tokenA)) ||
-        (deposit1Disabled && poolForPosition && tokenA && poolForPosition.token1.equals(tokenA)),
+      (deposit1Disabled && poolForPosition && tokenA && poolForPosition.token1.equals(tokenA)),
     )
   const depositBDisabled =
     invalidRange ||
     Boolean(
       (deposit0Disabled && poolForPosition && tokenB && poolForPosition.token0.equals(tokenB)) ||
-        (deposit1Disabled && poolForPosition && tokenB && poolForPosition.token1.equals(tokenB)),
+      (deposit1Disabled && poolForPosition && tokenB && poolForPosition.token1.equals(tokenB)),
     )
 
   // create position entity based on users selection

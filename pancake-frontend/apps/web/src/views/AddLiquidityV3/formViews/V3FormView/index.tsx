@@ -515,7 +515,7 @@ export default function V3FormView({
           gridAutoRows: 'max-content',
           gridAutoColumns: '100%',
         }}
-        disabled={!feeAmount || invalidPool || (noLiquidity && !startPriceTypedValue) || (!priceLower && !priceUpper)}
+        // disabled={!feeAmount || invalidPool || (noLiquidity && !startPriceTypedValue) || (!priceLower && !priceUpper)} // [DAVID]
       >
         <PreTitle mb="8px">{t('Deposit Amount')}</PreTitle>
 

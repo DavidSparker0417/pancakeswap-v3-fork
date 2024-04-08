@@ -10,6 +10,7 @@ import {
   lineaTokens,
   opBnbTokens,
   polygonZkEvmTokens,
+  pulseTestnetTokens,
   zkSyncTestnetTokens,
   zksyncTokens,
 } from '@pancakeswap/tokens'
@@ -55,6 +56,10 @@ export const priceHelperTokens = {
   [ChainId.OPBNB]: {
     chain: 'opbnb',
     list: [opBnbTokens.wbnb, opBnbTokens.usdt],
+  },
+  [ChainId.PULSE_TESTNET]: {
+    chain: 'pulseTestnet',
+    list: [pulseTestnetTokens.weth, pulseTestnetTokens.usdt],
   },
 } satisfies Record<number, PriceHelper>
 
