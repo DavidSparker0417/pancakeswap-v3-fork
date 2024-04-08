@@ -31,7 +31,7 @@ export const FACTORY_ADDRESS_MAP = {
   [ChainId.SEPOLIA]: '0x1bdc540dEB9Ed1fA29964DeEcCc524A8f5e2198e',
   [ChainId.ARBITRUM_SEPOLIA]: '0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E',
   [ChainId.BASE_SEPOLIA]: '0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E',
-  [ChainId.PULSE_TESTNET]: '0x???????????????????????????????????????',
+  [ChainId.PULSE_TESTNET]: '0x0x41adc52ad43E4B05D442EC5A8240991958a003e2',
 } as const satisfies Record<ChainId, Address>
 
 export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
