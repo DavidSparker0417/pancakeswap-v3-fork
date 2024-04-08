@@ -589,7 +589,9 @@ export default function V3FormView({
               </AutoRow>
             </Box>
           )}
-          <DynamicSection disabled={!feeAmount || invalidPool}>
+          <DynamicSection 
+            disabled={!feeAmount || invalidPool}
+          >
             <RowBetween mb="8px">
               <PreTitle>{t('Set Price Range')}</PreTitle>
               <RateToggle
