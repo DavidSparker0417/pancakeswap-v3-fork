@@ -4,9 +4,9 @@ import { withWebSecurityHeaders } from '@pancakeswap/next-config/withWebSecurity
 import smartRouterPkgs from '@pancakeswap/smart-router/package.json' assert { type: 'json' }
 import { withSentryConfig } from '@sentry/nextjs'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
+import vercelToolbarPlugin from '@vercel/toolbar/plugins/next'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import vercelToolbarPlugin from '@vercel/toolbar/plugins/next'
 
 const withVercelToolbar = vercelToolbarPlugin()
 
@@ -28,11 +28,11 @@ const sentryWebpackPluginOptions =
         //   urlPrefix, include, ignore
         silent: false, // Logging when deploying to check if there is any problem
         validate: true,
-        hideSourceMaps: false,
+        hideSourceMaps: true,
         // https://github.com/getsentry/sentry-webpack-plugin#options.
       }
     : {
-        hideSourceMaps: false,
+        hideSourceMaps: true,
         silent: true, // Suppresses all logs
         dryRun: !process.env.SENTRY_AUTH_TOKEN,
       }

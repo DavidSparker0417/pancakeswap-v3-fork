@@ -30,6 +30,12 @@ const eth: NetworkUserConfig = {
   accounts: [process.env.KEY_ETH!],
 }
 
+const pulseTestnet: NetworkUserConfig = {
+  url: 'https://rpc.v4.testnet.pulsechain.com',
+  chainId: 943,
+  accounts: [process.env.KEY_PULSE_TESTNET!],
+}
+
 const config: HardhatUserConfig = {
   solidity: {
     version: '0.7.6',
@@ -40,6 +46,7 @@ const config: HardhatUserConfig = {
     ...(process.env.KEY_MAINNET && { bscMainnet }),
     ...(process.env.KEY_GOERLI && { goerli }),
     ...(process.env.KEY_ETH && { eth }),
+    ...(process.env.KEY_PULSE_TESTNET && {pulseTestnet}),
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
