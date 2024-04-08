@@ -115,6 +115,7 @@ export default function useV3DerivedInfo(
 
   // pool
   const [poolState, pool] = usePool(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B], feeAmount)
+  console.log(`[DAVID] poolState = ${poolState}`);
   const noLiquidity = poolState === PoolState.NOT_EXISTS
 
   // note to parse inputs in reverse
