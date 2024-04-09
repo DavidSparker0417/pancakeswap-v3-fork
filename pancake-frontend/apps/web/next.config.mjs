@@ -226,6 +226,7 @@ const config = {
         reuseExistingChunk: true,
       }
     }
+    webpackConfig.cache = false;
     return webpackConfig
   },
 }
