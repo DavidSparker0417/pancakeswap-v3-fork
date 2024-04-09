@@ -107,7 +107,7 @@ export function UniversalAddLiquidity({
 
   const quoteCurrency =
     baseCurrency && currencyB && baseCurrency.wrapped.equals(currencyB.wrapped) ? undefined : currencyB
-
+    
   const [, , feeAmountFromUrl] = router.query.currency || []
 
   // fee selection from url
@@ -116,7 +116,8 @@ export function UniversalAddLiquidity({
       preferredFeeAmount ||
       (feeAmountFromUrl && Object.values(FeeAmount).includes(parseFloat(feeAmountFromUrl))
         ? parseFloat(feeAmountFromUrl)
-        : undefined)
+        : FeeAmount.MEDIUM // undefined // DAVID
+      )
     )
   }, [preferredFeeAmount, feeAmountFromUrl])
 

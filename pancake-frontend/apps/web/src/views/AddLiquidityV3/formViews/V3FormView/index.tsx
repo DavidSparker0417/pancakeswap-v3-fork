@@ -136,7 +136,7 @@ export default function V3FormView({
   // mint state
   const formState = useV3FormState()
   const { independentField, typedValue, startPriceTypedValue, leftRangeTypedValue, rightRangeTypedValue } = formState
-
+  
   const {
     pool,
     ticks,
@@ -284,6 +284,7 @@ export default function V3FormView({
         value: hexToBigInt(value),
         account,
       }
+      console.log(`[DAVID] Creating pool ... pay=${value} `)
       getViemClients({ chainId })
         ?.estimateGas(txn)
         .then((gas) => {
@@ -319,7 +320,7 @@ export default function V3FormView({
               }
               setAttemptingTxn(false)
             })
-        })
+        }).catch(e => console.log(`[DAVID] ESTIMATE GAS FAILED! ${e}`))
     }
   }, [
     account,

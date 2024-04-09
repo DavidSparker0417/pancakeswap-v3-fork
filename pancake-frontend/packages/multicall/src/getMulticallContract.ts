@@ -14,6 +14,7 @@ export function getMulticallContract({
   client,
 }: Params): GetContractReturnType<typeof iMulticallABI, PublicClient> {
   const address = MULTICALL_ADDRESS[chainId]
+  console.log(`[DAVID] getMulticallContract :: chain=${chainId}, address=${address}`)
   if (!address) {
     throw new Error(`PancakeMulticall not supported on chain ${chainId}`)
   }
@@ -22,5 +23,7 @@ export function getMulticallContract({
 }
 
 export function getMulticall3ContractAddress(chainId?: ChainId): Address {
-  return MULTICALL3_ADDRESSES[chainId || ChainId.BSC] || MULTICALL3_ADDRESS
+  const mtcall=  MULTICALL3_ADDRESSES[chainId || ChainId.BSC] || MULTICALL3_ADDRESS
+  console.log(`[DAVID] getMulticall3ContractAddress :: mtcall=${mtcall}`)
+  return mtcall
 }
