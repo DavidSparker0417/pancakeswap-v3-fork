@@ -225,8 +225,8 @@ const config = {
         reuseExistingChunk: true,
       }
     }
-    webpackConfig.cache.type = "filesystem";
-    webpackConfig.cache.allowCollectingMemory = true;
+    // webpackConfig.cache.type = "filesystem";
+    // webpackConfig.cache.allowCollectingMemory = true;
     return webpackConfig
   },
 }
