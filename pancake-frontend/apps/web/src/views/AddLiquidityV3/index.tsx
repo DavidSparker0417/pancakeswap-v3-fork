@@ -38,7 +38,6 @@ import { resetMintState } from 'state/mint/actions'
 import { useAddLiquidityV2FormDispatch } from 'state/mint/reducer'
 import { useStableSwapPairs } from 'state/swap/useStableSwapPairs'
 import { safeGetAddress } from 'utils'
-import FeeSelector from './formViews/V3FormView/components/FeeSelector'
 
 import { AprCalculator } from './components/AprCalculator'
 import { StableV3Selector } from './components/StableV3Selector'
@@ -306,7 +305,9 @@ export function UniversalAddLiquidity({
                 hideBalance
               />
             </FlexGap>
-            <DynamicSection disabled={!baseCurrency || !currencyB}>
+            <DynamicSection
+            // disabled={!baseCurrency || !currencyB} // DAVID
+            >
               {preferredSelectType !== SELECTOR_TYPE.V2 &&
                 stableConfig.stableSwapConfig &&
                 [SELECTOR_TYPE.STABLE, SELECTOR_TYPE.V3].includes(selectorType) && (
@@ -321,17 +322,17 @@ export function UniversalAddLiquidity({
 
               {((preferredSelectType === SELECTOR_TYPE.V2 && selectorType !== SELECTOR_TYPE.V3) ||
                 selectorType === SELECTOR_TYPE.V2) && (
-                <V2Selector
-                  isStable={Boolean(stableConfig.stableSwapConfig)}
-                  selectorType={selectorType}
-                  handleFeePoolSelect={({ type }) => {
-                    // keep using state instead of replacing url in UniversalLiquidity
-                    handleFeePoolSelect({ type })
-                  }}
-                />
-              )}
+                  <V2Selector
+                    isStable={Boolean(stableConfig.stableSwapConfig)}
+                    selectorType={selectorType}
+                    handleFeePoolSelect={({ type }) => {
+                      // keep using state instead of replacing url in UniversalLiquidity
+                      handleFeePoolSelect({ type })
+                    }}
+                  />
+                )}
 
-              {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
+              {/* {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
                 <FeeSelector
                   currencyA={baseCurrency ?? undefined}
                   currencyB={quoteCurrency ?? undefined}
@@ -339,7 +340,7 @@ export function UniversalAddLiquidity({
                   feeAmount={feeAmount}
                   handleSelectV2={() => handleFeePoolSelect({ type: SELECTOR_TYPE.V2 })}
                 />
-              )}
+              )} */}
             </DynamicSection>
           </AutoColumn>
           {selectorType === SELECTOR_TYPE.STABLE && (
