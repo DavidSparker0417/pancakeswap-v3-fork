@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
-    "dev": "next dev",
+    "dev": "next dev --max-old-space-size=4096",
     "build": "next info && next build && next-nginx-routes",
     "build-debug": "next info && next build --debug",
     "start": "next start",

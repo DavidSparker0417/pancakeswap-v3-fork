@@ -2,7 +2,6 @@
 import BundleAnalyzer from '@next/bundle-analyzer'
 import { withWebSecurityHeaders } from '@pancakeswap/next-config/withWebSecurityHeaders'
 import smartRouterPkgs from '@pancakeswap/smart-router/package.json' assert { type: 'json' }
-import { withSentryConfig } from '@sentry/nextjs'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
 import vercelToolbarPlugin from '@vercel/toolbar/plugins/next'
 import path from 'path'
@@ -226,11 +225,13 @@ const config = {
         reuseExistingChunk: true,
       }
     }
-    webpackConfig.cache = false;
+    webpackConfig.cache.type = "filesystem";
+    webpackConfig.cache.allowCollectingMemory = true;
     return webpackConfig
   },
 }
 
 export default withVercelToolbar(
-  withBundleAnalyzer(withVanillaExtract(withSentryConfig(withWebSecurityHeaders(config)), sentryWebpackPluginOptions)),
+  // withBundleAnalyzer(withVanillaExtract(withSentryConfig(withWebSecurityHeaders(config)), sentryWebpackPluginOptions)),
+  withBundleAnalyzer(withVanillaExtract(withWebSecurityHeaders(config))),
 )
