@@ -108,7 +108,7 @@ export function UniversalAddLiquidity({
 
   const quoteCurrency =
     baseCurrency && currencyB && baseCurrency.wrapped.equals(currencyB.wrapped) ? undefined : currencyB
-
+    
   const [, , feeAmountFromUrl] = router.query.currency || []
 
   // fee selection from url
@@ -117,7 +117,8 @@ export function UniversalAddLiquidity({
       preferredFeeAmount ||
       (feeAmountFromUrl && Object.values(FeeAmount).includes(parseFloat(feeAmountFromUrl))
         ? parseFloat(feeAmountFromUrl)
-        : undefined)
+        : FeeAmount.MEDIUM // undefined // DAVID
+      )
     )
   }, [preferredFeeAmount, feeAmountFromUrl])
 
@@ -321,15 +322,15 @@ export function UniversalAddLiquidity({
 
               {((preferredSelectType === SELECTOR_TYPE.V2 && selectorType !== SELECTOR_TYPE.V3) ||
                 selectorType === SELECTOR_TYPE.V2) && (
-                <V2Selector
-                  isStable={Boolean(stableConfig.stableSwapConfig)}
-                  selectorType={selectorType}
-                  handleFeePoolSelect={({ type }) => {
-                    // keep using state instead of replacing url in UniversalLiquidity
-                    handleFeePoolSelect({ type })
-                  }}
-                />
-              )}
+                  <V2Selector
+                    isStable={Boolean(stableConfig.stableSwapConfig)}
+                    selectorType={selectorType}
+                    handleFeePoolSelect={({ type }) => {
+                      // keep using state instead of replacing url in UniversalLiquidity
+                      handleFeePoolSelect({ type })
+                    }}
+                  />
+                )}
 
               {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
                 <FeeSelector

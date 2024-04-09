@@ -39,6 +39,7 @@ const goerliClient = createPublicClient({
 
 // @ts-ignore
 export const viemProviders: OnChainProvider = ({ chainId }: { chainId?: ChainId }) => {
+  console.log(`[DAVID] viemProviders :: chainId = ${chainId}`)
   switch (chainId) {
     case ChainId.ETHEREUM:
       return mainnetClient

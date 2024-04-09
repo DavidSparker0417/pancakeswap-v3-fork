@@ -179,9 +179,10 @@ export abstract class NonfungiblePositionManager {
    * Cannot be constructed.
    */
   // eslint-disable-next-line
-  private constructor() {}
+  private constructor() { }
 
   private static encodeCreate(pool: Pool): Hex {
+    console.log(`[DAVID] --- encodeCreate --- :: POOL :: ${pool.token0.address} ${pool.token1.address}, ${pool.fee}, ${pool.sqrtRatioX96}}`)
     return encodeFunctionData({
       abi: NonfungiblePositionManager.ABI,
       functionName: 'createAndInitializePoolIfNecessary',
@@ -227,7 +228,19 @@ export abstract class NonfungiblePositionManager {
     // mint
     if (isMint(options)) {
       const recipient = validateAndParseAddress(options.recipient)
-
+      console.log(`[DAVID] MINT transaction :: ARGS = ${JSON.stringify({
+        token0: position.pool.token0.address,
+        token1: position.pool.token1.address,
+        fee: position.pool.fee,
+        tickLower: position.tickLower,
+        tickUpper: position.tickUpper,
+        amount0Desired: amount0Desired.toString(),
+        amount1Desired: amount1Desired.toString(),
+        amount0Min: amount0Min.toString(),
+        amount1Min: amount1Min.toString(),
+        recipient,
+        deadline: deadline.toString(),
+      })}`)
       calldatas.push(
         encodeFunctionData({
           abi: NonfungiblePositionManager.ABI,
@@ -271,20 +284,21 @@ export abstract class NonfungiblePositionManager {
 
     let value: Hex = toHex(0)
 
-    if (options.useNative) {
-      const { wrapped } = options.useNative
-      invariant(position.pool.token0.equals(wrapped) || position.pool.token1.equals(wrapped), 'NO_WETH')
+    // if (options.useNative) {
+    //   const { wrapped } = options.useNative
+    //   invariant(position.pool.token0.equals(wrapped) || position.pool.token1.equals(wrapped), 'NO_WETH')
 
-      const wrappedValue = position.pool.token0.equals(wrapped) ? amount0Desired : amount1Desired
+    //   const wrappedValue = position.pool.token0.equals(wrapped) ? amount0Desired : amount1Desired
 
-      // we only need to refund if we're actually sending ETH
-      if (wrappedValue > ZERO) {
-        calldatas.push(Payments.encodeRefundETH())
-      }
+    //   // we only need to refund if we're actually sending ETH
+    //   if (wrappedValue > ZERO) {
+    //     calldatas.push(Payments.encodeRefundETH())
+    //   }
 
-      value = toHex(wrappedValue)
-    }
+    //   value = toHex(wrappedValue)
+    // }
 
+    console.log(`[DAVID] :: addCallParameters VALUE=${value}`)
     return {
       calldata: Multicall.encodeMulticall(calldatas),
       value,
