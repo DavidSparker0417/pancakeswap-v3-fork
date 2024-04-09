@@ -303,7 +303,7 @@
 
 "@chainlink/contracts@^0.6.1":
   version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@chainlink/contracts/-/contracts-0.6.1.tgz#8842b57e755793cbdbcbc45277fb5d179c993e19"
+  resolved "https://registry.npmjs.org/@chainlink/contracts/-/contracts-0.6.1.tgz"
   integrity sha512-EuwijGexttw0UjfrW+HygwhQIrGAbqpf1ue28R55HhWMHBzphEH0PhWm8DQmFfj5OZNy8Io66N4L0nStkZ3QKQ==
   dependencies:
     "@eth-optimism/contracts" "^0.5.21"
@@ -1343,6 +1343,21 @@
   resolved "https://registry.npmjs.org/@nomicfoundation/hardhat-toolbox/-/hardhat-toolbox-2.0.2.tgz"
   integrity sha512-vnN1AzxbvpSx9pfdRHbUzTRIXpMLPXnUlkW855VaDk6N1pwRaQ2gNzEmFAABk4lWf11E00PKwFd/q27HuwYrYg==
 
+"@nomicfoundation/hardhat-verify@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@nomicfoundation/hardhat-verify/-/hardhat-verify-2.0.5.tgz#dcc2cb5e5c55a39704c7d492436f80f05a4ca5a3"
+  integrity sha512-Tg4zu8RkWpyADSFIgF4FlJIUEI4VkxcvELsmbJn2OokbvH2SnUrqKmw0BBfDrtvP0hhmx8wsnrRKP5DV/oTyTA==
+  dependencies:
+    "@ethersproject/abi" "^5.1.2"
+    "@ethersproject/address" "^5.0.2"
+    cbor "^8.1.0"
+    chalk "^2.4.2"
+    debug "^4.1.1"
+    lodash.clonedeep "^4.5.0"
+    semver "^6.3.0"
+    table "^6.8.0"
+    undici "^5.14.0"
+
 "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@nomicfoundation/solidity-analyzer-darwin-arm64/-/solidity-analyzer-darwin-arm64-0.1.1.tgz#4c858096b1c17fe58a474fe81b46815f93645c15"
@@ -1409,15 +1424,10 @@
     "@nomicfoundation/solidity-analyzer-win32-ia32-msvc" "0.1.1"
     "@nomicfoundation/solidity-analyzer-win32-x64-msvc" "0.1.1"
 
-"@nomiclabs/hardhat-ethers@^2.0.0", "@nomiclabs/hardhat-ethers@^2.0.2":
+"@nomiclabs/hardhat-ethers@^2.0.0", "@nomiclabs/hardhat-ethers@^2.0.2", "@nomiclabs/hardhat-ethers@^2.2.2":
   version "2.2.2"
   resolved "https://registry.npmjs.org/@nomiclabs/hardhat-ethers/-/hardhat-ethers-2.2.2.tgz"
   integrity sha512-NLDlDFL2us07C0jB/9wzvR0kuLivChJWCXTKcj3yqjZqMoYp7g7wwS157F70VHx/+9gHIBGzak5pKDwG8gEefA==
-
-"@nomiclabs/hardhat-ethers@^2.2.2":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@nomiclabs/hardhat-ethers/-/hardhat-ethers-2.2.3.tgz#b41053e360c31a32c2640c9a45ee981a7e603fe0"
-  integrity sha512-YhzPdzb612X591FOe68q+qXVXGG2ANZRvDo0RRUtimev85rCrAlv/TLMEZw5c+kq9AbzocLTVX/h2jVIFPL9Xg==
 
 "@nomiclabs/hardhat-etherscan@^2.1.8":
   version "2.1.8"
@@ -1521,9 +1531,9 @@
   integrity sha512-W6QmqgkADuFcTLzHL8vVoNBtkwjvQRpYIAom7KiUNoLKghyx3FgH0GBjt8NRvigV1ZmMOBllvE1By1C+bi8WpA==
 
 "@openzeppelin/contracts@^4.8.1":
-  version "4.9.6"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.9.6.tgz#2a880a24eb19b4f8b25adc2a5095f2aa27f39677"
-  integrity sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA==
+  version "4.8.2"
+  resolved "https://registry.npmjs.org/@openzeppelin/contracts/-/contracts-4.8.2.tgz"
+  integrity sha512-kEUOgPQszC0fSYWpbh2kT94ltOJwj1qfT2DWo+zVttmGmf97JZ99LspePNaeeaLhCImaHVeBbjaQFZQn7+Zc5g==
 
 "@openzeppelin/contracts@~4.3.3":
   version "4.3.3"
@@ -2288,10 +2298,10 @@
   resolved "https://registry.npmjs.org/@uniswap/lib/-/lib-4.0.1-alpha.tgz"
   integrity sha512-f6UIliwBbRsgVLxIaBANF6w09tYqc6Y/qXdsrbEmXHyFA7ILiKrIwRFXe1yOg8M3cksgVsO9N7yuL2DdCGQKBA==
 
-"@uniswap/sdk-core@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@uniswap/sdk-core/-/sdk-core-4.2.0.tgz#9930f133baec9c1118d891ebf8fcba7f7efc153d"
-  integrity sha512-yXAMLHZRYYuh6KpN2nOlLTYBjGiopmI9WUB4Z0tyNkW4ZZub54cUt22eibpGbZAhRAMxclox9IPIs6wwrM3soQ==
+"@uniswap/sdk-core@^3.0.1":
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/@uniswap/sdk-core/-/sdk-core-3.2.2.tgz"
+  integrity sha512-dPA34T8EVfFzKtw1NC1Mr7M0aXpY1UN+lUpdBv757JxKKMlGQTg96XTIfjYCflqEshxlBdz2+IVQgk6H+dMu5g==
   dependencies:
     "@ethersproject/address" "^5.0.2"
     big.js "^5.2.2"
@@ -2346,13 +2356,13 @@
     base64-sol "1.0.1"
 
 "@uniswap/v3-sdk@^3.9.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@uniswap/v3-sdk/-/v3-sdk-3.11.0.tgz#328309fbafddd8c618b7b6850bb99cacf6733a79"
-  integrity sha512-gz6Q6SlN34AXvxhyz181F90D4OuIkxLnzBAucEzB9Fv3Z+3orHZY/SpGaD02nP1VsNQVu/DQvOsdkPUDGn1Y9Q==
+  version "3.9.0"
+  resolved "https://registry.npmjs.org/@uniswap/v3-sdk/-/v3-sdk-3.9.0.tgz"
+  integrity sha512-LuoF3UcY1DxSAQKJ3E4/1Eq4HaNp+x+7q9mvbpiu+/PBj+O1DjLforAMrKxu+RsA0aarmZtz7yBnAPy+akgfgQ==
   dependencies:
     "@ethersproject/abi" "^5.0.12"
     "@ethersproject/solidity" "^5.0.9"
-    "@uniswap/sdk-core" "^4.2.0"
+    "@uniswap/sdk-core" "^3.0.1"
     "@uniswap/swap-router-contracts" "^1.2.1"
     "@uniswap/v3-periphery" "^1.1.1"
     "@uniswap/v3-staker" "1.0.0"
@@ -8613,6 +8623,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz"
   integrity sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
 
 lodash.flatten@^4.4.0:
   version "4.4.0"

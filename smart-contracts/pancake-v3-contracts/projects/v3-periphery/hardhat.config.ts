@@ -1,6 +1,7 @@
 import type { HardhatUserConfig, NetworkUserConfig } from 'hardhat/types'
 import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-etherscan'
+// import '@nomiclabs/hardhat-etherscan'
+import '@nomicfoundation/hardhat-verify'
 import '@nomiclabs/hardhat-waffle'
 import '@openzeppelin/hardhat-upgrades'
 import '@typechain/hardhat'
