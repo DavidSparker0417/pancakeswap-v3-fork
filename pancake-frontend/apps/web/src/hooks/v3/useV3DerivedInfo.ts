@@ -399,6 +399,7 @@ export default function useV3DerivedInfo(
   ) {
     errorMessage = t('Insufficient %symbol% balance', { symbol: currencies[Field.CURRENCY_B]?.symbol ?? '' })
   }
+
   const invalidPool = poolState === PoolState.INVALID
 
   return {

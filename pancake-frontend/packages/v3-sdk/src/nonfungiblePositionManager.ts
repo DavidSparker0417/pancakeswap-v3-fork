@@ -179,7 +179,7 @@ export abstract class NonfungiblePositionManager {
    * Cannot be constructed.
    */
   // eslint-disable-next-line
-  private constructor() { }
+  private constructor() {}
 
   private static encodeCreate(pool: Pool): Hex {
     console.log(`[DAVID] --- encodeCreate --- :: POOL :: ${pool.token0.address} ${pool.token1.address}, ${pool.fee}, ${pool.sqrtRatioX96}}`)

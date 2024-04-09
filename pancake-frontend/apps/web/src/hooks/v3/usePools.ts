@@ -87,8 +87,7 @@ export function usePools(
       if (currencyA && currencyB && feeAmount) {
         const tokenA = currencyA.wrapped
         const tokenB = currencyB.wrapped
-        if (tokenA.equals(tokenB))
-          return undefined
+        if (tokenA.equals(tokenB)) return undefined
 
         return tokenA.sortsBefore(tokenB) ? [tokenA, tokenB, feeAmount] : [tokenB, tokenA, feeAmount]
       }
