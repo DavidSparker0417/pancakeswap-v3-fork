@@ -1,6 +1,7 @@
 import type { HardhatUserConfig, NetworkUserConfig } from 'hardhat/types'
 import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-etherscan'
+// import '@nomiclabs/hardhat-etherscan'
+import '@nomicfoundation/hardhat-verify'
 import '@nomiclabs/hardhat-waffle'
 import '@openzeppelin/hardhat-upgrades'
 import '@typechain/hardhat'
@@ -101,7 +102,37 @@ export default {
     // mainnet: bscMainnet,
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY || '',
+    apiKey: {
+      bsctestnet: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      bsc: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      pulseTestnet: "0000000000000000000000000000000000",
+    },
+    customChains: [
+      {
+        network: "bsctestnet",
+        chainId: 97,
+        urls: {
+          apiURL: "https://api-testnet.bscscan.com/api",
+          browserURL: "https://testnet.bscscan.com"
+        }
+      },
+      {
+        network: "bsc",
+        chainId: 56,
+        urls: {
+          apiURL: "https://api.bscscan.com/api",
+          browserURL: "https://bscscan.com"
+        }
+      },
+      {
+        network: "pulseTestnet",
+        chainId: 943,
+        urls: {
+          apiURL: "https://api.scan.pulsechain.com/api",
+          browserURL: "https://rpc.v4.testnet.pulsechain.com"
+        }
+      },
+    ]
   },
   solidity: {
     compilers: [DEFAULT_COMPILER_SETTINGS],
