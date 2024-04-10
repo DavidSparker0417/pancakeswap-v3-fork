@@ -226,19 +226,6 @@ export abstract class NonfungiblePositionManager {
     //mint
     if (isMint(options)) {
       const recipient = validateAndParseAddress(options.recipient)
-      console.log(`[DAVID] MINT transaction :: ARGS = ${JSON.stringify({
-        token0: position.pool.token0.address,
-        token1: position.pool.token1.address,
-        fee: position.pool.fee,
-        tickLower: position.tickLower,
-        tickUpper: position.tickUpper,
-        amount0Desired: amount0Desired.toString(),
-        amount1Desired: amount1Desired.toString(),
-        amount0Min: amount0Min.toString(),
-        amount1Min: amount1Min.toString(),
-        recipient,
-        deadline: deadline.toString(),
-      })}`)
       calldatas.push(
         encodeFunctionData({
           abi: NonfungiblePositionManager.ABI,
@@ -296,7 +283,6 @@ export abstract class NonfungiblePositionManager {
       value = toHex(wrappedValue)
     }
 
-    console.log(`[DAVID] :: addCallParameters VALUE=${value}`)
     return {
       calldata: Multicall.encodeMulticall(calldatas),
       value,

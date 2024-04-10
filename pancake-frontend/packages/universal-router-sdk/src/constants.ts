@@ -32,7 +32,7 @@ const UNIVERSAL_ROUTER_ADDRESSES: Record<ChainId, Address> = {
   [ChainId.OPBNB]: '0xB89a6778D1efE7a5b7096757A21b810CC2886fa1',
   [ChainId.OPBNB_TESTNET]: '0xa8EEA7aa6620712524d18D742821848e55E773B5',
 
-  [ChainId.PULSE_TESTNET]: '0x????????????????????????????????',
+  [ChainId.PULSE_TESTNET]: '0x9588C29E0A87cA723b4AB15171C61093A045f008',
 }
 
 export const getUniversalRouterAddress = (chainId: ChainId): Address => {
