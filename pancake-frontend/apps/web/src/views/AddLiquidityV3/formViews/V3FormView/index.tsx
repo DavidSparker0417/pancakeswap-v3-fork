@@ -136,7 +136,7 @@ export default function V3FormView({
   // mint state
   const formState = useV3FormState()
   const { independentField, typedValue, startPriceTypedValue, leftRangeTypedValue, rightRangeTypedValue } = formState
-  
+
   const {
     pool,
     ticks,
@@ -284,7 +284,6 @@ export default function V3FormView({
         value: hexToBigInt(value),
         account,
       }
-      console.log(`[DAVID] Creating pool ... pay=${value} `)
       getViemClients({ chainId })
         ?.estimateGas(txn)
         .then((gas) => {
@@ -516,7 +515,7 @@ export default function V3FormView({
           gridAutoRows: 'max-content',
           gridAutoColumns: '100%',
         }}
-        // disabled={!feeAmount || invalidPool || (noLiquidity && !startPriceTypedValue) || (!priceLower && !priceUpper)} // [DAVID]
+      // disabled={!feeAmount || invalidPool || (noLiquidity && !startPriceTypedValue) || (!priceLower && !priceUpper)} // [DAVID]
       >
         <PreTitle mb="8px">{t('Deposit Amount')}</PreTitle>
 
@@ -590,7 +589,7 @@ export default function V3FormView({
               </AutoRow>
             </Box>
           )}
-          <DynamicSection 
+          <DynamicSection
             disabled={!feeAmount || invalidPool}
           >
             <RowBetween mb="8px">

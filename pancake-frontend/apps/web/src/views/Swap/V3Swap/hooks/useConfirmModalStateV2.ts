@@ -392,6 +392,7 @@ export const useConfirmModalStateV2 = (
     ) {
       const nextStep = confirmActions.findIndex((step) => step.step === confirmState)
       const nextStepState = confirmActions[nextStep + 1]?.step ?? ConfirmModalState.PENDING_CONFIRMATION
+      console.log(`[DAVID] -------- CONFIRM STATE = ${confirmState}`)
       performStep({ nextStep: nextStepState, stepActions: confirmActions, state: confirmState })
     }
   }, [confirmActions, confirmState, performStep, preConfirmState])
