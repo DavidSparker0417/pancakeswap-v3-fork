@@ -224,7 +224,7 @@ export const WETH9 = {
   ),
   [ChainId.PULSE_TESTNET]: new ERC20Token(
     ChainId.PULSE_TESTNET,
-    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+    '0x70499adEBB11Efd915E3b69E700c331778628707',
     18,
     'WETH',
     'Wrapped Ether',
