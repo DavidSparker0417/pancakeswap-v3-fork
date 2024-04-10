@@ -20,11 +20,11 @@ import {
   opBnbTokens,
   polygonZkEvmTestnetTokens,
   polygonZkEvmTokens,
+  pulseTestnetTokens,
   scrollSepoliaTokens,
   sepoliaTokens,
   zkSyncTestnetTokens,
   zksyncTokens,
-  pulseTestnetTokens,
 } from '@pancakeswap/tokens'
 
 import { ChainMap, ChainTokenList } from '../types'
@@ -74,7 +74,7 @@ export const V2_ROUTER_ADDRESS: ChainMap<string> = {
   [ChainId.SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
   [ChainId.ARBITRUM_SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
   [ChainId.BASE_SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
-  [ChainId.PULSE_TESTNET]: '0x???????????????????????????????????',
+  [ChainId.PULSE_TESTNET]: '0x5C449F11C719b41fE92f35Dd9ffDA1CCBC8f9021'
 }
 
 export const STABLE_SWAP_INFO_ADDRESS: ChainMap<string> = {
