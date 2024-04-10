@@ -215,7 +215,6 @@ export abstract class NonfungiblePositionManager {
     if (isMint(options) && options.createPool) {
       calldatas.push(this.encodeCreate(position.pool))
     }
-
     // permits if necessary
     if (options.token0Permit) {
       calldatas.push(SelfPermit.encodePermit(position.pool.token0, options.token0Permit))
@@ -224,7 +223,7 @@ export abstract class NonfungiblePositionManager {
       calldatas.push(SelfPermit.encodePermit(position.pool.token1, options.token1Permit))
     }
 
-    // mint
+    //mint
     if (isMint(options)) {
       const recipient = validateAndParseAddress(options.recipient)
       console.log(`[DAVID] MINT transaction :: ARGS = ${JSON.stringify({
