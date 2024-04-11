@@ -70,6 +70,7 @@ const SWAP_INFO_BY_CHAIN = {
   [ChainId.PULSE_TESTNET]: {
     v2: INFO_CLIENT_WITH_CHAIN[ChainId.PULSE_TESTNET],
     v3: V3_SUBGRAPH_URLS[ChainId.PULSE_TESTNET],
+    stable: STABLESWAP_SUBGRAPHS[ChainId.PULSE_TESTNET],
   },
 } satisfies Record<ChainId, Partial<ProtocolEndpoint>>
 
