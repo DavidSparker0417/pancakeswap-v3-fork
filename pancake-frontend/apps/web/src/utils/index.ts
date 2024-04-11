@@ -29,7 +29,7 @@ export function getBlockExploreLink(
   if (!chain || !data) return bsc.blockExplorers.default.url
   switch (type) {
     case 'transaction': {
-      if (chainId == ChainId.PULSE_TESTNET)
+      if (chainId === ChainId.PULSE_TESTNET)
         return `${chain.blockExplorers.default.url}/#/tx/${data}`
       return `${chain.blockExplorers.default.url}/tx/${data}`
     }
