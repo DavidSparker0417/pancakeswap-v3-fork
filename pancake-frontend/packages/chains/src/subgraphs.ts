@@ -44,7 +44,7 @@ export function getV3Subgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.SEPOLIA]: null,
     [ChainId.ARBITRUM_SEPOLIA]: null,
     [ChainId.BASE_SEPOLIA]: null,
-    [ChainId.PULSE_TESTNET]: 'https://node.9inch.io:8000/subgraphs/name/pancakeswap/exchange-v3',
+    [ChainId.PULSE_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/exchange-v3',
   } satisfies Record<ChainId, string | null>
 }
 
