@@ -4,6 +4,7 @@ import {
   BLOCKS_CLIENT_ETH,
   BLOCKS_CLIENT_LINEA,
   BLOCKS_CLIENT_OPBNB,
+  BLOCKS_CLIENT_PULSETEST,
   BLOCKS_CLIENT_ZKSYNC,
 } from 'config/constants/endpoints'
 import { GraphQLClient } from 'graphql-request'
@@ -23,7 +24,7 @@ import { arbitrum, base, bsc, linea, mainnet, opBNB, polygonZkEvm, zkSync } from
 
 export type MultiChainName = 'BSC' | 'ETH' | 'POLYGON_ZKEVM' | 'ZKSYNC' | 'ARB' | 'LINEA' | 'BASE' | 'OPBNB'
 
-export type MultiChainNameExtend = MultiChainName | 'BSC_TESTNET' | 'ZKSYNC_TESTNET'
+export type MultiChainNameExtend = MultiChainName | 'BSC_TESTNET' | 'ZKSYNC_TESTNET' | 'PULSE_TESTNET'
 
 export const multiChainName: Record<number | string, MultiChainNameExtend> = {
   [ChainId.BSC]: 'BSC',
@@ -35,6 +36,7 @@ export const multiChainName: Record<number | string, MultiChainNameExtend> = {
   [ChainId.BASE]: 'BASE',
   [ChainId.OPBNB]: 'OPBNB',
   [ChainId.ARBITRUM_ONE]: 'ARB',
+  [ChainId.PULSE_TESTNET]: 'PULSE_TESTNET',
 }
 
 export const multiChainShortName: Record<number, string> = {
@@ -63,6 +65,7 @@ export const multiChainBlocksClient: Record<MultiChainNameExtend, string> = {
   LINEA: BLOCKS_CLIENT_LINEA,
   BASE: BLOCKS_CLIENT_BASE,
   OPBNB: BLOCKS_CLIENT_OPBNB,
+  PULSE_TESTNET: BLOCKS_CLIENT_PULSETEST,
 }
 
 export const multiChainStartTime = {
@@ -107,6 +110,7 @@ export const multiChainQueryClient = {
   LINEA: v2Clients[ChainId.LINEA],
   BASE: v2Clients[ChainId.BASE],
   OPBNB: v2Clients[ChainId.OPBNB],
+  PULSE_TESTNET: v2Clients[ChainId.PULSE_TESTNET],
 }
 
 export const multiChainQueryStableClient = {

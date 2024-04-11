@@ -18,6 +18,7 @@ export const BLOCKS_SUBGRAPHS = getBlocksSubgraphs(publicSubgraphParams)
 export const STABLESWAP_SUBGRAPHS = {
   [ChainId.BSC]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-stableswap',
   [ChainId.ARBITRUM_ONE]: 'https://api.thegraph.com/subgraphs/name/pancakeswap/exchange-stableswap-arb',
+  [ChainId.PULSE_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/exchange-stableswap',
 }
 
 export function getV3Subgraphs({ noderealApiKey }: SubgraphParams) {
@@ -43,7 +44,7 @@ export function getV3Subgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.SEPOLIA]: null,
     [ChainId.ARBITRUM_SEPOLIA]: null,
     [ChainId.BASE_SEPOLIA]: null,
-    [ChainId.PULSE_TESTNET]: null
+    [ChainId.PULSE_TESTNET]: 'https://node.9inch.io:8000/subgraphs/name/pancakeswap/exchange-v3',
   } satisfies Record<ChainId, string | null>
 }
 
@@ -59,6 +60,7 @@ export function getV2Subgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.LINEA]: 'https://api.studio.thegraph.com/query/45376/exchange-v2-linea/version/latest',
     [ChainId.BASE]: 'https://api.studio.thegraph.com/query/45376/exchange-v2-base/version/latest',
     [ChainId.OPBNB]: `https://open-platform-ap.nodereal.io/${noderealApiKey}/opbnb-mainnet-graph-query/subgraphs/name/pancakeswap/exchange-v2`,
+    [ChainId.PULSE_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/exchange',
   }
 }
 
@@ -72,5 +74,6 @@ export function getBlocksSubgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.LINEA]: 'https://api.studio.thegraph.com/query/45376/blocks-linea/version/latest',
     [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/base-blocks/version/latest',
     [ChainId.OPBNB]: `https://open-platform-ap.nodereal.io/${noderealApiKey}/opbnb-mainnet-graph-query/subgraphs/name/pancakeswap/blocks`,
+    [ChainId.BSC_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/blocks',
   }
 }

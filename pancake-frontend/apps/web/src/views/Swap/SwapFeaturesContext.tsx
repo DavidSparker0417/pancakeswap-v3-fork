@@ -28,6 +28,7 @@ export const SwapFeaturesContext = createContext<{
 const CHART_SUPPORT_CHAIN_IDS = [
   ChainId.BSC,
   ChainId.BSC_TESTNET,
+  ChainId.PULSE_TESTNET
   // ChainId.ETHEREUM
 ]
 const STABLE_SUPPORT_CHAIN_IDS = [ChainId.BSC_TESTNET, ChainId.BSC]

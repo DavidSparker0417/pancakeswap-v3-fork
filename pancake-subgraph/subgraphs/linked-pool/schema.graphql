@@ -1,0 +1,28 @@
+type Swap @entity {
+    "ID (hash)"
+    id: ID!
+
+    baseToken: String!
+    baseTokenAmount: BigInt!
+    quoteToken: String!
+    quoteTokenAmount: BigInt!
+
+    mmTreasury: String!
+    mm: String!
+    user: String!
+    nonce: BigInt!
+    tx: Bytes!
+    block: BigInt!
+    timestamp: BigInt!
+}
+
+
+type Token @entity {
+    "ID (hash)"
+    id: ID!
+
+    "Decimals"
+    decimals: BigInt!
+    "Symbol"
+    symbol: String!
+}
