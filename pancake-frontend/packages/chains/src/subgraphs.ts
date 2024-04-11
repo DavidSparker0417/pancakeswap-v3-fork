@@ -74,6 +74,6 @@ export function getBlocksSubgraphs({ noderealApiKey }: SubgraphParams) {
     [ChainId.LINEA]: 'https://api.studio.thegraph.com/query/45376/blocks-linea/version/latest',
     [ChainId.BASE]: 'https://api.studio.thegraph.com/query/48211/base-blocks/version/latest',
     [ChainId.OPBNB]: `https://open-platform-ap.nodereal.io/${noderealApiKey}/opbnb-mainnet-graph-query/subgraphs/name/pancakeswap/blocks`,
-    [ChainId.BSC_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/blocks',
+    [ChainId.PULSE_TESTNET]: 'https://node.9inch.io/subgraphs/name/pancakeswap/blocks',
   }
 }

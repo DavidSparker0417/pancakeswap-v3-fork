@@ -1,7 +1,7 @@
+import { ChainId, getLlamaChainName } from '@pancakeswap/chains'
 import { gql } from 'graphql-request'
 import orderBy from 'lodash/orderBy'
-import { multiChainBlocksClient, multiChainName, MultiChainNameExtend } from 'state/info/constant'
-import { ChainId, getLlamaChainName } from '@pancakeswap/chains'
+import { MultiChainNameExtend, multiChainBlocksClient, multiChainName } from 'state/info/constant'
 import { Block } from 'state/info/types'
 import { multiQuery } from 'views/Info/utils/infoQueryHelpers'
 
@@ -58,13 +58,13 @@ export const getBlocksFromTimestamps = async (
     }, Promise.resolve([] as Block[]))
     return orderBy(blocks, (block) => block.number, sortDirection)
   }
+  console.log(`[DAVID] getBlocksFromTimestamps:: chainName = ${chainName}, multiChainBlocksClient = ${JSON.stringify(multiChainBlocksClient)}`)
   const fetchedData: any = await multiQuery(
     blocksQueryConstructor,
     getBlockSubqueries(timestamps),
     multiChainBlocksClient[chainName],
     skipCount,
   )
-
   const blocks: Block[] = []
   if (fetchedData) {
     // eslint-disable-next-line no-restricted-syntax
