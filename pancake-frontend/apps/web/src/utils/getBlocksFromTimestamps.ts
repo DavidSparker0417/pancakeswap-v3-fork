@@ -58,13 +58,13 @@ export const getBlocksFromTimestamps = async (
     }, Promise.resolve([] as Block[]))
     return orderBy(blocks, (block) => block.number, sortDirection)
   }
-  console.log(`[DAVID] getBlocksFromTimestamps:: chainName = ${chainName}, multiChainBlocksClient = ${JSON.stringify(multiChainBlocksClient)}`)
   const fetchedData: any = await multiQuery(
     blocksQueryConstructor,
     getBlockSubqueries(timestamps),
     multiChainBlocksClient[chainName],
     skipCount,
   )
+  console.log(`[DAVID] getBlocksFromTimestamps::  fetchedData = ${JSON.stringify(fetchedData)}`)
   const blocks: Block[] = []
   if (fetchedData) {
     // eslint-disable-next-line no-restricted-syntax
