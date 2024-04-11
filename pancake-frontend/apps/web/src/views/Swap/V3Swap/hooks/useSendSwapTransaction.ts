@@ -72,6 +72,7 @@ export default function useSendSwapTransaction(
       callback: async function onSwap(): Promise<SendTransactionResult> {
         const estimatedCalls: SwapCallEstimate[] = await Promise.all(
           swapCalls.map((call) => {
+            console.log(`[DAVID] ON-SWAP:: callMap = ${JSON.stringify(call)}`)
             const { address, calldata, value } = call
             if ('getCall' in call) {
               // Only WallchainSwapCall, don't use rest of pipeline
