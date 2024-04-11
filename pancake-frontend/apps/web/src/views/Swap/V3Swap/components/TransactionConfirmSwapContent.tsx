@@ -91,7 +91,7 @@ export const TransactionConfirmSwapContent = memo<TransactionConfirmSwapContentP
         : null
       return inputCurrencyAmount && slippageAdjustedAmounts && slippageAdjustedAmounts[Field.INPUT]
         ? inputCurrencyAmount.greaterThan(slippageAdjustedAmounts[Field.INPUT]) ||
-            inputCurrencyAmount.equalTo(slippageAdjustedAmounts[Field.INPUT])
+        inputCurrencyAmount.equalTo(slippageAdjustedAmounts[Field.INPUT])
         : false
     }, [currencyBalances, trade, slippageAdjustedAmounts])
 

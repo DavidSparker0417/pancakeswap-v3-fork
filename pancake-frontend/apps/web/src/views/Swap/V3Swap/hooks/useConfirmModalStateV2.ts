@@ -296,6 +296,7 @@ const useConfirmActions = (
         }
 
         try {
+          console.log(`[DAVID] -------- Swapping... `)
           const result = await swap()
           if (result?.hash) {
             setTxHash(result.hash)
@@ -376,6 +377,7 @@ export const useConfirmModalStateV2 = (
     const stepActions = steps.map((step) => actions[step])
     const nextStep = steps[1] ?? undefined
 
+    console.log(`[DAVID] -------- callToAction:: STATE = ${steps}`)
     performStep({
       nextStep,
       stepActions,

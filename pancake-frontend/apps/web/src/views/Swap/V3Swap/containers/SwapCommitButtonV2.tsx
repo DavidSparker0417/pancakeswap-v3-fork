@@ -257,8 +257,8 @@ const SwapCommitButtonInner = memo(function SwapCommitButtonInner({
           (priceImpactSeverity > 3 && !isExpertMode
             ? t('Price Impact Too High')
             : priceImpactSeverity > 2
-            ? t('Swap Anyway')
-            : t('Swap'))}
+              ? t('Swap Anyway')
+              : t('Swap'))}
       </CommitButton>
     </Box>
   )

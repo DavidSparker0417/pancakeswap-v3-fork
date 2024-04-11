@@ -32,19 +32,19 @@ export const useApprovalPhaseStepTitles: ({
 }: {
   trade: Pick<SmartRouterTrade<TradeType>, 'inputAmount'> | undefined
 }) => {
-  [step in AllowedAllowanceState]: string
-} = ({ trade }) => {
-  const { t } = useTranslation()
-  return useMemo(() => {
-    return {
-      [ConfirmModalState.RESETTING_APPROVAL]: t('Reset approval on USDT.'),
-      [ConfirmModalState.APPROVING_TOKEN]: t('Approve %symbol%', {
-        symbol: trade ? trade.inputAmount.currency.symbol : '',
-      }),
-      [ConfirmModalState.PERMITTING]: t('Permit %symbol%', { symbol: trade ? trade.inputAmount.currency.symbol : '' }),
-    }
-  }, [t, trade])
-}
+    [step in AllowedAllowanceState]: string
+  } = ({ trade }) => {
+    const { t } = useTranslation()
+    return useMemo(() => {
+      return {
+        [ConfirmModalState.RESETTING_APPROVAL]: t('Reset approval on USDT.'),
+        [ConfirmModalState.APPROVING_TOKEN]: t('Approve %symbol%', {
+          symbol: trade ? trade.inputAmount.currency.symbol : '',
+        }),
+        [ConfirmModalState.PERMITTING]: t('Permit %symbol%', { symbol: trade ? trade.inputAmount.currency.symbol : '' }),
+      }
+    }, [t, trade])
+  }
 
 type ConfirmSwapModalProps = InjectedModalProps & {
   customOnDismiss?: () => void
@@ -125,7 +125,6 @@ export const ConfirmSwapModalV2: React.FC<ConfirmSwapModalProps> = ({
     const currencyB = currencyBalances?.OUTPUT?.currency ?? trade?.outputAmount?.currency
     const amountA = formatAmount(trade?.inputAmount, 6) ?? ''
     const amountB = formatAmount(trade?.outputAmount, 6) ?? ''
-
     if (swapErrorMessage) {
       const errorMessage =
         txHash && isMM ? (
