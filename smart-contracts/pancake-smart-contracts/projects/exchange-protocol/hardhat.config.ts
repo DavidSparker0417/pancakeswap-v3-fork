@@ -6,6 +6,7 @@ import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
 import "solidity-coverage";
 import "dotenv/config";
+require('dotenv').config({ path: require('find-config')('.env') })
 
 const bscTestnet: NetworkUserConfig = {
   url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
@@ -31,14 +32,62 @@ const sepolia: NetworkUserConfig = {
   accounts: [process.env.KEY_TESTNET!],
 }
 
-const config: HardhatUserConfig = {
+const mumbai: NetworkUserConfig = {
+  url: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
+  chainId: 80001,
+  accounts: [process.env.KEY_TESTNET!],
+}
+
+const config = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
-    testnet: sepolia,
+    testnet: mumbai,
     // testnet: bscTestnet,
     // testnet: pulseTestnet,
     // mainnet: bscMainnet,
+  },
+  etherscan: {
+    apiKey: {
+      bsctestnet: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      bsc: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      pulseTestnet: "0000000000000000000000000000000000",
+      mumbai: "KMUEE12BAEC489N8J76FKZYA7ZKNRQMVZ4",
+    },
+    customChains: [
+      {
+        network: "bsctestnet",
+        chainId: 97,
+        urls: {
+          apiURL: "https://api-testnet.bscscan.com/api",
+          browserURL: "https://testnet.bscscan.com"
+        }
+      },
+      {
+        network: "bsc",
+        chainId: 56,
+        urls: {
+          apiURL: "https://api.bscscan.com/api",
+          browserURL: "https://bscscan.com"
+        }
+      },
+      {
+        network: "pulseTestnet",
+        chainId: 943,
+        urls: {
+          apiURL: "https://api.scan.pulsechain.com/api",
+          browserURL: "https://rpc.v4.testnet.pulsechain.com"
+        }
+      },
+      {
+        network: "mumbai",
+        chainId: 80001,
+        urls: {
+          apiURL: "https://api-testnet.polygonscan.com/api",
+          browserURL: "https://mumbai.polygonscan.com/"
+        }
+      },
+    ]
   },
   solidity: {
     compilers: [

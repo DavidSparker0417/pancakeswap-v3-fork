@@ -4,6 +4,9 @@
   "version": "2.0.0",
   "license": "GPL-3.0/MIT",
   "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "compile": "npx hardhat compile",
     "deploy:testnet": "npx hardhat run --network testnet scripts/deploy.ts",
@@ -15,5 +18,8 @@
   "devDependencies": {
     "@openzeppelin/contracts": "^4.2.0",
     "@uniswap/lib": "4.0.1-alpha"
+  },
+  "dependencies": {
+    "find-config": "^1.0.0"
   }
 }
