@@ -76,10 +76,10 @@ export function fetchTokenName(tokenAddress: Address): string {
 
 export function fetchTokenDecimals(tokenAddress: Address): BigInt {
   let contract = ERC20.bind(tokenAddress);
-  let decimalValue = 0;
+  let decimalValue = null;
   let decimalResult = contract.try_decimals();
   if (!decimalResult.reverted) {
     decimalValue = decimalResult.value;
   }
-  return BigInt.fromI32(decimalValue);
+  return BigInt.fromI32(decimalValue as i32);
 }

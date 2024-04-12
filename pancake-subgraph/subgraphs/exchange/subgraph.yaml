@@ -34,7 +34,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: bsc
+    network: pulsechaintestnet
     source:
       abi: Pair
     mapping:

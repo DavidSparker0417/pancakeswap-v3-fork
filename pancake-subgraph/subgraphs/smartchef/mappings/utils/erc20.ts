@@ -51,12 +51,12 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
 
 export function fetchTokenDecimals(tokenAddress: Address): BigInt {
   let contract = ERC20.bind(tokenAddress);
-  let decimalValue = null as BigInt;
+  let decimalValue = null;
   let decimalResult = contract.try_decimals();
   if (!decimalResult.reverted) {
-    decimalValue = BigInt.fromI32(decimalResult.value);
+    decimalValue = decimalResult.value;
   }
-  return decimalValue;
+  return BigInt.fromI32(decimalValue as i32);
 }
 
 export function getOrCreateToken(address: Address): Token {

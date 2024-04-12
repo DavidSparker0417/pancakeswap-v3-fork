@@ -11,11 +11,5 @@
     "codegen": "graph codegen subgraph.yaml",
     "build": "graph build subgraph.yaml",
     "deploy": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ chef-jojo/exchange-v3-lite subgraph.yaml"
-  },
-  "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.69.1"
-  },
-  "dependencies": {
-    "@graphprotocol/graph-ts": "^0.34.0"
   }
 }

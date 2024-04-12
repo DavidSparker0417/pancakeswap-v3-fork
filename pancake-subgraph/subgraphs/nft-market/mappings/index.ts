@@ -92,7 +92,7 @@ export function handleAskNew(event: AskNew): void {
   user.numberTokensListed = user.numberTokensListed.plus(ONE_BI);
   user.save();
 
-  let collection = Collection.load(event.params.collection.toHex()) as Collection;
+  let collection = Collection.load(event.params.collection.toHex());
   collection.numberTokensListed = collection.numberTokensListed.plus(ONE_BI);
   collection.save();
 
@@ -216,7 +216,7 @@ export function handleTrade(event: Trade): void {
   }
 
   // 2. Seller
-  let seller = User.load(event.params.seller.toHex()) as User;
+  let seller = User.load(event.params.seller.toHex());
 
   seller.numberTokensSold = seller.numberTokensSold.plus(ONE_BI);
   seller.numberTokensListed = seller.numberTokensListed.minus(ONE_BI);
@@ -234,7 +234,7 @@ export function handleTrade(event: Trade): void {
 
   // 4. NFT
   let tokenConcatId = event.params.collection.toHex() + "-" + event.params.tokenId.toString();
-  let token = NFT.load(tokenConcatId) as NFT;
+  let token = NFT.load(tokenConcatId);
 
   token.latestTradedPriceInBNB = toBigDecimal(event.params.askPrice, 18);
   token.tradeVolumeBNB = token.tradeVolumeBNB.plus(token.latestTradedPriceInBNB);

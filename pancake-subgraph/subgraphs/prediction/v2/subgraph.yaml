@@ -1,5 +1,10 @@
-specVersion: 1.0.0
+specVersion: 0.0.2
 description: Pancake Prediction V2
+features:
+  - grafting
+graft:
+  base: QmaHRgUYDNKEXueDTA1Ntnv4rTWsignS9LojZFwyBr2mVm
+  block: 17140600
 repository: https://github.com/pancakeswap
 schema:
   file: ./schema.graphql
@@ -13,7 +18,7 @@ dataSources:
       startBlock: 10333825
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./mappings/index.ts
       entities:

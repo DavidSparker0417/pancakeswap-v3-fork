@@ -41,7 +41,6 @@ export function handleTeamPointIncrease(event: TeamPointIncrease): void {
   let team = Team.load(event.params.teamId.toString());
   if (team === null) {
     log.error("Error in contract, increased point when teamId: {} was not created.", [event.params.teamId.toString()]);
-    team = new Team(event.params.teamId.toString());
   }
 
   let pointId = concat(
@@ -57,9 +56,8 @@ export function handleTeamPointIncrease(event: TeamPointIncrease): void {
   point.timestamp = event.block.timestamp;
   point.save();
 
-  let _team = team as Team;
-  _team.totalPoints = _team.totalPoints.plus(point.points);
-  _team.save();
+  team.totalPoints = team.totalPoints.plus(point.points);
+  team.save();
 }
 
 /**
@@ -87,11 +85,9 @@ export function handleUserNew(event: UserNew): void {
   let team = Team.load(event.params.teamId.toString());
   if (team === null) {
     log.error("Error in contract, joined team when teamId: {} was not created.", [event.params.teamId.toString()]);
-    team = new Team(event.params.teamId.toString());
   }
-  let _team = team as Team;
-  _team.totalUsers = _team.totalUsers.plus(ONE_BI);
-  _team.save();
+  team.totalUsers = team.totalUsers.plus(ONE_BI);
+  team.save();
 }
 
 export function handleUserUpdate(event: UserUpdate): void {
@@ -119,46 +115,38 @@ export function handleUserPause(event: UserPause): void {
   let user = User.load(event.params.userAddress.toHex());
   if (user === null) {
     log.error("Error in contract, paused user when userId: {} was not created.", [event.params.userAddress.toHex()]);
-    user = new User(event.params.userAddress.toHex());
   }
-  let _user = user as User;
-  _user.isActive = false;
-  _user.updatedAt = event.block.timestamp;
-  _user.save();
+  user.isActive = false;
+  user.updatedAt = event.block.timestamp;
+  user.save();
 
   // Update the team based on the new user joining it.
   let team = Team.load(event.params.teamId.toString());
   if (team === null) {
     log.error("Error in contract, paused user when teamId: {} was not created.", [event.params.teamId.toString()]);
-    team = new Team(event.params.teamId.toString());
   }
-  let _team = team as Team;
-  _team.totalUsers = _team.totalUsers.minus(ONE_BI);
-  _team.save();
+  team.totalUsers = team.totalUsers.minus(ONE_BI);
+  team.save();
 }
 
 export function handleUserReactivate(event: UserReactivate): void {
   let user = User.load(event.params.userAddress.toHex());
   if (user === null) {
     log.error("Error in contract, resumed user when userId: {} was not created.", [event.params.userAddress.toHex()]);
-    user = new User(event.params.userAddress.toHex());
   }
-  let _user = user as User;
-  _user.isActive = true;
-  _user.nftAddress = event.params.nftAddress;
-  _user.tokenId = event.params.tokenId;
-  _user.updatedAt = event.block.timestamp;
-  _user.save();
+  user.isActive = true;
+  user.nftAddress = event.params.nftAddress;
+  user.tokenId = event.params.tokenId;
+  user.updatedAt = event.block.timestamp;
+  user.save();
 
   // Update the team based on the new user joining it.
   let team = Team.load(event.params.teamId.toString());
   if (team === null) {
     log.error("Error in contract, resumed user when teamId: {} was not created.", [event.params.teamId.toString()]);
-    team = new Team(event.params.teamId.toString());
   }
-  let _team = team as Team;
-  _team.totalUsers = _team.totalUsers.plus(ONE_BI);
-  _team.save();
+  team.totalUsers = team.totalUsers.plus(ONE_BI);
+  team.save();
 }
 
 export function handleUserChangeTeam(event: UserChangeTeam): void {
@@ -168,11 +156,9 @@ export function handleUserChangeTeam(event: UserChangeTeam): void {
     log.error("Error in contract, changed team when (old) teamId: {} was not created.", [
       event.params.oldTeamId.toString(),
     ]);
-    oldTeam = new Team(event.params.oldTeamId.toString());
   }
-  let _oldTeam = oldTeam as Team;
-  _oldTeam.totalUsers = _oldTeam.totalUsers.minus(ONE_BI);
-  _oldTeam.save();
+  oldTeam.totalUsers = oldTeam.totalUsers.minus(ONE_BI);
+  oldTeam.save();
 
   // Update the (new) team based on the user joining it.
   let newTeam = Team.load(event.params.newTeamId.toString());
@@ -180,21 +166,17 @@ export function handleUserChangeTeam(event: UserChangeTeam): void {
     log.error("Error in contract, changed team when (new) teamId: {} was not created.", [
       event.params.newTeamId.toString(),
     ]);
-    newTeam = new Team(event.params.newTeamId.toString());
   }
-  let _newTeam = newTeam as Team;
-  _newTeam.totalUsers = _newTeam.totalUsers.plus(ONE_BI);
-  _newTeam.save();
+  newTeam.totalUsers = newTeam.totalUsers.plus(ONE_BI);
+  newTeam.save();
 
   // Update the user based on his (new) team.
   let user = User.load(event.params.userAddress.toHex());
   if (user === null) {
     log.error("Error in contract, changed team when userId: {} was not created.", [event.params.userAddress.toHex()]);
-    user = new User(event.params.userAddress.toHex());
   }
-  let _user = user as User;
-  _user.team = event.params.newTeamId.toString();
-  _user.save();
+  user.team = event.params.newTeamId.toString();
+  user.save();
 }
 
 export function handleUserPointIncrease(event: UserPointIncrease): void {
@@ -203,7 +185,6 @@ export function handleUserPointIncrease(event: UserPointIncrease): void {
     log.error("Error in contract, increased point when userId: {} was not created.", [
       event.params.userAddress.toHex(),
     ]);
-    user = new User(event.params.userAddress.toHex());
   }
 
   let pointId = concat(
@@ -219,19 +200,15 @@ export function handleUserPointIncrease(event: UserPointIncrease): void {
   point.timestamp = event.block.timestamp;
   point.save();
 
-  let _user = user as User;
-  _user.totalPoints = _user.totalPoints.plus(point.points);
-  _user.save();
+  user.totalPoints = user.totalPoints.plus(point.points);
+  user.save();
 }
 
 export function handleUserPointIncreaseMultiple(event: UserPointIncreaseMultiple): void {
-  let userAddress: Address;
-  for (let i = 0, k = event.params.userAddresses.length; i < k; i++) {
-    userAddress = event.params.userAddresses[i];
+  event.params.userAddresses.forEach((userAddress: Address) => {
     let user = User.load(userAddress.toHex());
     if (user === null) {
       log.error("Error in contract, increased point when userId: {} was not created.", [userAddress.toHex()]);
-      user = new User(userAddress.toHex());
     }
 
     let pointId = concat(
@@ -247,10 +224,9 @@ export function handleUserPointIncreaseMultiple(event: UserPointIncreaseMultiple
     point.timestamp = event.block.timestamp;
     point.save();
 
-    let _user = user as User;
-    _user.totalPoints = _user.totalPoints.plus(point.points);
-    _user.save();
-  }
+    user.totalPoints = user.totalPoints.plus(point.points);
+    user.save();
+  });
 }
 
 const getAutoIncrementId = (): BigInt => {

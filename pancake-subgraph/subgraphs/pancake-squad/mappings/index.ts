@@ -106,7 +106,7 @@ export function handleTransfer(event: Transfer): void {
   transaction.from = from.id;
   transaction.to = to.id;
   transaction.token = token.id;
-//  transaction.gasUsed = event.transaction.gasUsed;
+  transaction.gasUsed = event.transaction.gasUsed;
   transaction.gasPrice = toBigDecimal(event.transaction.gasPrice, 9);
   transaction.block = event.block.number;
   transaction.timestamp = event.block.timestamp;

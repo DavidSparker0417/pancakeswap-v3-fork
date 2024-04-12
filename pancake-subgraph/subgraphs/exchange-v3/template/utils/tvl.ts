@@ -27,7 +27,7 @@ export function updateDerivedTVLAmounts(
   oldPoolTotalValueLockedETH: BigDecimal,
   oldPoolTotalValueLockedETHUntracked: BigDecimal
 ): void {
-  let bundle = Bundle.load("1") as Bundle;
+  let bundle = Bundle.load("1");
 
   // Update token TVL values.
   token0.totalValueLockedUSD = token0.totalValueLocked.times(token0.derivedETH.times(bundle.ethPriceUSD));

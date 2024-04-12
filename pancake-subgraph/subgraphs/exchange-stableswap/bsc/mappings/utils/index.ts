@@ -11,17 +11,17 @@ import { ERC20NameBytes } from "../../generated/StableSwapFactory/ERC20NameBytes
 import { PriceLens0 } from "../../generated/StableSwapFactory/PriceLens0";
 
 export let ADDRESS_ZERO = "0x0000000000000000000000000000000000000000";
-export let STABLESWAP_FACTORY_ADDRESS = "0x36bbb126e75351c0dfb651e39b38fe0bc436ffd2";
-export let STABLESWAP_FACTORY_ADDRESS_2 = "0x25a55f9f2279A54951133D503490342b50E5cd15";
-export let PCS_FACTORY_ADDRESS = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73";
-export let BUSD_ADDRESS = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
-export let WBNB_ADDRESS = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
-export let CAKE_ADDRESS = "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82";
+export let STABLESWAP_FACTORY_ADDRESS = "0x5e85B7e1a2133E42Ce4660A23F02cc176B21e394";
+export let STABLESWAP_FACTORY_ADDRESS_2 = "0x25a55f9f2279A54951133D503490342b50E5cd15"; // ??
+export let PCS_FACTORY_ADDRESS = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73"; // ??
+export let BUSD_ADDRESS = "0xe9e7cea3dedca5984780bafc599bd69add087d56"; // ??
+export let WBNB_ADDRESS = "0x70499adEBB11Efd915E3b69E700c331778628707";
+export let CAKE_ADDRESS = "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"; // ??
 
 //When new factory was deployed, and SC address into list
 export let FACTORIES: string[] = [STABLESWAP_FACTORY_ADDRESS, STABLESWAP_FACTORY_ADDRESS_2];
 
-export let priceLensContract = PriceLens0.bind(Address.fromString("0x6234d989583520565d00131948c1fb7c4ebb691d"));
+export let priceLensContract = PriceLens0.bind(Address.fromString("0x6234d989583520565d00131948c1fb7c4ebb691d")); // ??
 
 export let BUSD_ADDR = Address.fromString(BUSD_ADDRESS);
 export let WBNB_ADDR = Address.fromString(WBNB_ADDRESS);

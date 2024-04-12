@@ -71,7 +71,7 @@ export function handlePause(event: Pause): void {
   round.save();
 
   // Also fail the previous round because it will not complete.
-  let previousRound = Round.load(round.previous as string);
+  let previousRound = Round.load(round.previous);
   if (previousRound !== null) {
     previousRound.failed = true;
     previousRound.save();
@@ -204,8 +204,7 @@ export function handleEndRound(event: EndRound): void {
 
   // Get round result based on lock/close price.
   if (round.closePrice) {
-    let closePrice = round.closePrice as BigDecimal;
-    if ((closePrice as BigDecimal).equals(round.lockPrice as BigDecimal)) {
+    if (round.closePrice.equals(round.lockPrice as BigDecimal)) {
       round.position = "House";
 
       let market = Market.load("1");
@@ -218,9 +217,9 @@ export function handleEndRound(event: EndRound): void {
         market.netBNB = market.netBNB.plus(round.totalAmount);
         market.save();
       }
-    } else if (closePrice.gt(round.lockPrice as BigDecimal)) {
+    } else if (round.closePrice.gt(round.lockPrice as BigDecimal)) {
       round.position = "Bull";
-    } else if (closePrice.lt(round.lockPrice as BigDecimal)) {
+    } else if (round.closePrice.lt(round.lockPrice as BigDecimal)) {
       round.position = "Bear";
     } else {
       round.position = null;

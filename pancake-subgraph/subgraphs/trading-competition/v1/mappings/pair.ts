@@ -9,7 +9,7 @@ import { BD_1E18, BI_ONE, TRACKED_PAIRS } from "./utils";
  */
 
 export function handleSwap(event: Swap): void {
-  let competition = Competition.load("1") as Competition;
+  let competition = Competition.load("1");
   // Competition is not in progress, ignoring trade.
   if (competition.status.notEqual(BI_ONE)) {
     log.info("Competition is not in progress, ignoring trade; status: {}", [competition.status.toString()]);
@@ -24,8 +24,8 @@ export function handleSwap(event: Swap): void {
   }
 
   // We load other entities as the trade is doomed valid and competition is in progress.
-  let bundle = Bundle.load("1") as Bundle;
-  let team = Team.load(user.team) as Team;
+  let bundle = Bundle.load("1");
+  let team = Team.load(user.team);
 
   let bnbIN: BigDecimal;
   let bnbOUT: BigDecimal;

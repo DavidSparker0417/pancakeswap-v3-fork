@@ -14,11 +14,5 @@
     "deploy:polygon-zkevm": "graph deploy --studio exchange-v2-polygon-zkevm",
     "deploy:zksync-goerli": "graph deploy --studio graph deploy --studio exchange-v2-zksync-testnet",
     "deploy:opbnb": "graph deploy --node https://open-platform-ap.nodereal.io/$API_KEY/opbnb-mainnet-graph-indexer/ --ipfs https://api.thegraph.com/ipfs/ pancakeswap/exchange-v2"
-  },
-  "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.69.1"
-  },
-  "dependencies": {
-    "@graphprotocol/graph-ts": "^0.34.0"
   }
 }

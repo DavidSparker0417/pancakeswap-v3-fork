@@ -58,7 +58,7 @@ export function handlePause(event: Pause): void {
     round.save();
 
     // Also fail the previous round because it will not complete.
-    let previousRound = Round.load(round.previous as string);
+    let previousRound = Round.load(round.previous);
     if (previousRound !== null) {
       previousRound.failed = true;
       previousRound.save();
@@ -162,7 +162,7 @@ export function handleStartRound(event: StartRound): void {
 }
 
 export function handleLockRound(event: LockRound): void {
-  let round = Round.load(event.params.epoch.toString()) as Round;
+  let round = Round.load(event.params.epoch.toString());
   if (round === null) {
     log.error("Tried to lock round without an existing round (epoch: {}).", [event.params.epoch.toString()]);
   }
@@ -175,7 +175,7 @@ export function handleLockRound(event: LockRound): void {
 }
 
 export function handleEndRound(event: EndRound): void {
-  let round = Round.load(event.params.epoch.toString()) as Round;
+  let round = Round.load(event.params.epoch.toString());
   if (round === null) {
     log.error("Tried to end round without an existing round (epoch: {}).", [event.params.epoch.toString()]);
   }
@@ -185,14 +185,12 @@ export function handleEndRound(event: EndRound): void {
   round.endHash = event.transaction.hash;
   round.closePrice = event.params.price.divDecimal(EIGHT_BD);
 
-  let closePrice = round.closePrice as BigDecimal;
-
   // Get round result based on lock/close price.
-  if (closePrice.equals(round.lockPrice as BigDecimal)) {
+  if (round.closePrice.equals(round.lockPrice as BigDecimal)) {
     round.position = "House";
-  } else if (closePrice.gt(round.lockPrice as BigDecimal)) {
+  } else if (round.closePrice.gt(round.lockPrice as BigDecimal)) {
     round.position = "Bull";
-  } else if (closePrice.lt(round.lockPrice as BigDecimal)) {
+  } else if (round.closePrice.lt(round.lockPrice as BigDecimal)) {
     round.position = "Bear";
   } else {
     round.position = null;
@@ -206,16 +204,14 @@ export function handleBetBull(event: BetBull): void {
   let market = Market.load("1");
   if (market === null) {
     log.error("Tried query market with bet (bear)", []);
-    market = new Market("1");
   }
-  let _market = market as Market;
-  _market.totalBets = _market.totalBets.plus(ONE_BI);
-  _market.totalBetsBull = _market.totalBetsBull.plus(ONE_BI);
-  _market.totalBNB = _market.totalBNB.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _market.totalBNBBull = _market.totalBNBBull.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _market.save();
+  market.totalBets = market.totalBets.plus(ONE_BI);
+  market.totalBetsBull = market.totalBetsBull.plus(ONE_BI);
+  market.totalBNB = market.totalBNB.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  market.totalBNBBull = market.totalBNBBull.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  market.save();
 
-  let round = Round.load(event.params.currentEpoch.toString()) as Round;
+  let round = Round.load(event.params.currentEpoch.toString());
   if (round === null) {
     log.error("Tried to bet (bull) without an existing round (epoch: {}).", [event.params.currentEpoch.toString()]);
   }
@@ -236,8 +232,8 @@ export function handleBetBull(event: BetBull): void {
     user.totalBets = ZERO_BI;
     user.totalBNB = ZERO_BD;
 
-    _market.totalUsers = _market.totalUsers.plus(ONE_BI);
-    _market.save();
+    market.totalUsers = market.totalUsers.plus(ONE_BI);
+    market.save();
   }
   user.updatedAt = event.block.timestamp;
   user.totalBets = user.totalBets.plus(ONE_BI);
@@ -262,26 +258,22 @@ export function handleBetBear(event: BetBear): void {
   let market = Market.load("1");
   if (market === null) {
     log.error("Tried query market with bet (bear)", []);
-    market = new Market("1");
   }
-  let _market = market as Market;
-  _market.totalBets = _market.totalBets.plus(ONE_BI);
-  _market.totalBetsBear = _market.totalBetsBear.plus(ONE_BI);
-  _market.totalBNB = _market.totalBNB.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _market.totalBNBBear = _market.totalBNBBear.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _market.save();
+  market.totalBets = market.totalBets.plus(ONE_BI);
+  market.totalBetsBear = market.totalBetsBear.plus(ONE_BI);
+  market.totalBNB = market.totalBNB.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  market.totalBNBBear = market.totalBNBBear.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  market.save();
 
   let round = Round.load(event.params.currentEpoch.toString());
   if (round === null) {
     log.error("Tried to bet (bear) without an existing round (epoch: {}).", [event.params.currentEpoch.toString()]);
-    round = new Round(event.params.currentEpoch.toString());
   }
-  let _round = round as Round;
-  _round.totalBets = _round.totalBets.plus(ONE_BI);
-  _round.totalAmount = _round.totalAmount.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _round.bearBets = _round.bearBets.plus(ONE_BI);
-  _round.bearAmount = _round.bearAmount.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
-  _round.save();
+  round.totalBets = round.totalBets.plus(ONE_BI);
+  round.totalAmount = round.totalAmount.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  round.bearBets = round.bearBets.plus(ONE_BI);
+  round.bearAmount = round.bearAmount.plus(event.params.amount.divDecimal(EIGHTEEN_BD));
+  round.save();
 
   // Fail safe condition in case the user has not been created yet.
   let user = User.load(event.params.sender.toHex());
@@ -294,8 +286,8 @@ export function handleBetBear(event: BetBear): void {
     user.totalBets = ZERO_BI;
     user.totalBNB = ZERO_BD;
 
-    _market.totalUsers = _market.totalUsers.plus(ONE_BI);
-    _market.save();
+    market.totalUsers = market.totalUsers.plus(ONE_BI);
+    market.save();
   }
   user.updatedAt = event.block.timestamp;
   user.totalBets = user.totalBets.plus(ONE_BI);
@@ -304,7 +296,7 @@ export function handleBetBear(event: BetBear): void {
 
   let betId = concat(event.params.sender, Bytes.fromI32(event.params.currentEpoch.toI32())).toHex();
   let bet = new Bet(betId);
-  bet.round = _round.id;
+  bet.round = round.id;
   bet.user = user.id;
   bet.hash = event.transaction.hash;
   bet.amount = event.params.amount.divDecimal(EIGHTEEN_BD);
@@ -332,20 +324,16 @@ export function handleRewardsCalculated(event: RewardsCalculated): void {
   let market = Market.load("1");
   if (market === null) {
     log.error("Tried query market after rewards were calculated for a round", []);
-    market = new Market("1");
   }
-  let _market = market as Market;
-  _market.totalBNBTreasury = _market.totalBNBTreasury.plus(event.params.treasuryAmount.divDecimal(EIGHTEEN_BD));
-  _market.save();
+  market.totalBNBTreasury = market.totalBNBTreasury.plus(event.params.treasuryAmount.divDecimal(EIGHTEEN_BD));
+  market.save();
 
   let round = Round.load(event.params.epoch.toString());
   if (round === null) {
     log.error("Tried query round (epoch: {}) after rewards were calculated for a round", [
       event.params.epoch.toString(),
     ]);
-    round = new Round(event.params.epoch.toString());
   }
-  let _round = round as Round;
-  _round.totalAmountTreasury = event.params.treasuryAmount.divDecimal(EIGHTEEN_BD);
-  _round.save();
+  round.totalAmountTreasury = event.params.treasuryAmount.divDecimal(EIGHTEEN_BD);
+  round.save();
 }

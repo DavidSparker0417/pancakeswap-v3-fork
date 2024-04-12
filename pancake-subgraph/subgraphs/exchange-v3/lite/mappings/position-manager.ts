@@ -87,8 +87,8 @@ export function handleIncreaseLiquidity(event: IncreaseLiquidity): void {
     return;
   }
 
-  let token0 = Token.load(position.token0) as Token;
-  let token1 = Token.load(position.token1) as Token;
+  let token0 = Token.load(position.token0);
+  let token1 = Token.load(position.token1);
 
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
   let amount1 = convertTokenToDecimal(event.params.amount1, token1.decimals);
@@ -97,11 +97,11 @@ export function handleIncreaseLiquidity(event: IncreaseLiquidity): void {
   position.depositedToken0 = position.depositedToken0.plus(amount0);
   position.depositedToken1 = position.depositedToken1.plus(amount1);
 
-  updateFeeVars(position, event, event.params.tokenId);
+  updateFeeVars(position!, event, event.params.tokenId);
 
   position.save();
 
-  savePositionSnapshot(position, event);
+  savePositionSnapshot(position!, event);
 }
 
 export function handleDecreaseLiquidity(event: DecreaseLiquidity): void {
@@ -112,8 +112,8 @@ export function handleDecreaseLiquidity(event: DecreaseLiquidity): void {
     return;
   }
 
-  let token0 = Token.load(position.token0) as Token;
-  let token1 = Token.load(position.token1) as Token;
+  let token0 = Token.load(position.token0);
+  let token1 = Token.load(position.token1);
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
   let amount1 = convertTokenToDecimal(event.params.amount1, token1.decimals);
 
@@ -121,9 +121,9 @@ export function handleDecreaseLiquidity(event: DecreaseLiquidity): void {
   position.withdrawnToken0 = position.withdrawnToken0.plus(amount0);
   position.withdrawnToken1 = position.withdrawnToken1.plus(amount1);
 
-  position = updateFeeVars(position, event, event.params.tokenId);
+  position = updateFeeVars(position!, event, event.params.tokenId);
   position.save();
-  savePositionSnapshot(position, event);
+  savePositionSnapshot(position!, event);
 }
 
 export function handleCollect(event: Collect): void {
@@ -136,14 +136,14 @@ export function handleCollect(event: Collect): void {
     return;
   }
 
-  let token0 = Token.load(position.token0) as Token;
+  let token0 = Token.load(position.token0);
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
   position.collectedFeesToken0 = position.collectedFeesToken0.plus(amount0);
   position.collectedFeesToken1 = position.collectedFeesToken1.plus(amount0);
 
-  position = updateFeeVars(position, event, event.params.tokenId);
+  position = updateFeeVars(position!, event, event.params.tokenId);
   position.save();
-  savePositionSnapshot(position, event);
+  savePositionSnapshot(position!, event);
 }
 
 export function handleTransfer(event: Transfer): void {
@@ -157,5 +157,5 @@ export function handleTransfer(event: Transfer): void {
   position.owner = event.params.to;
   position.save();
 
-  savePositionSnapshot(position, event);
+  savePositionSnapshot(position!, event);
 }

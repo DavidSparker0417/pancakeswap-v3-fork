@@ -24,7 +24,7 @@ export function fetchSymbol(address: Address): string {
   return "unknown";
 }
 
-export function fetchDecimals(address: Address): BigInt | null {
+export function fetchDecimals(address: Address): BigInt {
   let contract = ERC20.bind(address);
 
   let decimalResult = contract.try_decimals();

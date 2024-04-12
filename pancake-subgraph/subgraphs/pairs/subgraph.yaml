@@ -1,10 +1,8 @@
-specVersion: 0.0.4
+specVersion: 0.0.2
 description: Track Pairs and Tokens on PancakeSwap (v2) protocol
 repository: https://github.com/pancakeswap
 schema:
   file: ./schema.graphql
-features:
-  - fullTextSearch
 dataSources:
   - kind: ethereum/contract
     name: Factory
@@ -15,7 +13,7 @@ dataSources:
       startBlock: 6809737
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.7
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./mappings/factory.ts
       entities:

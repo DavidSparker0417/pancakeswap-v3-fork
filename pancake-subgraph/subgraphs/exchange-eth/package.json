@@ -6,9 +6,9 @@
   "author": "PancakeSwap",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "auth": "graph auth --product hosted-service SUBGRAPH_ACCESS_TOKEN",
+    "auth": "graph auth --studio b358b8—fe0994",
     "codegen": "graph codegen subgraph.yaml",
     "build": "graph build subgraph.yaml",
-    "deploy": "graph deploy --product hosted-service pancakeswap/exhange-eth"
+    "deploy": "graph deploy --studio pancake/exchange"
   }
 }

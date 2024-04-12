@@ -54,10 +54,9 @@ export function handleTicketsPurchase(event: TicketsPurchase): void {
   let lottery = Lottery.load(event.params.lotteryId.toString());
   if (lottery === null) {
     log.warning("Trying to purchase tickets for an unknown lottery - #{}", [event.params.lotteryId.toString()]);
-    lottery = new Lottery(event.params.lotteryId.toString());
   }
-  (lottery as Lottery).totalTickets = (lottery as Lottery).totalTickets.plus(event.params.numberTickets);
-  (lottery as Lottery).save();
+  lottery.totalTickets = lottery.totalTickets.plus(event.params.numberTickets);
+  lottery.save();
 
   let user = User.load(event.params.buyer.toHex());
   if (user === null) {
@@ -70,7 +69,7 @@ export function handleTicketsPurchase(event: TicketsPurchase): void {
     user.save();
   }
   user.totalTickets = user.totalTickets.plus(event.params.numberTickets);
-  user.totalCake = user.totalCake.plus(event.params.numberTickets.toBigDecimal().times((lottery as Lottery).ticketPrice));
+  user.totalCake = user.totalCake.plus(event.params.numberTickets.toBigDecimal().times(lottery.ticketPrice));
   user.save();
 
   let roundId = concat(
@@ -90,19 +89,17 @@ export function handleTicketsPurchase(event: TicketsPurchase): void {
     user.totalRounds = user.totalRounds.plus(ONE_BI);
     user.save();
 
-    (lottery as Lottery).totalUsers = (lottery as Lottery).totalUsers.plus(ONE_BI);
-    (lottery as Lottery).save();
+    lottery.totalUsers = lottery.totalUsers.plus(ONE_BI);
+    lottery.save();
   }
   round.totalTickets = round.totalTickets.plus(event.params.numberTickets);
   round.save();
 }
 
 export function handleTicketsClaim(event: TicketsClaim): void {
-  let lottery = Lottery.load(event.params.lotteryId.toString()) as Lottery;
+  let lottery = Lottery.load(event.params.lotteryId.toString());
   if (lottery !== null) {
-    let claimedTickets = lottery.claimedTickets as BigInt;
-    claimedTickets = claimedTickets.plus(event.params.numberTickets);
-    lottery.claimedTickets = claimedTickets;
+    lottery.claimedTickets = lottery.claimedTickets.plus(event.params.numberTickets);
     lottery.save();
   }
 

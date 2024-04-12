@@ -33,17 +33,17 @@ import { updateDerivedTVLAmounts } from "../utils/tvl";
 
 export function handleInitialize(event: Initialize): void {
   // update pool sqrt price and tick
-  let pool = Pool.load(event.address.toHexString()) as Pool;
+  let pool = Pool.load(event.address.toHexString());
   pool.sqrtPrice = event.params.sqrtPriceX96;
   pool.tick = BigInt.fromI32(event.params.tick);
   pool.save();
 
   // update token prices
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
 
   // update ETH price now that prices could have changed
-  let bundle = Bundle.load("1") as Bundle;
+  let bundle = Bundle.load("1");
   bundle.ethPriceUSD = getEthPriceInUSD();
   bundle.save();
 
@@ -58,13 +58,13 @@ export function handleInitialize(event: Initialize): void {
 }
 
 export function handleMint(event: MintEvent): void {
-  let bundle = Bundle.load("1") as Bundle;
+  let bundle = Bundle.load("1");
   let poolAddress = event.address.toHexString();
-  let pool = Pool.load(poolAddress) as Pool;
-  let factory = Factory.load(FACTORY_ADDRESS) as Factory;
+  let pool = Pool.load(poolAddress);
+  let factory = Factory.load(FACTORY_ADDRESS);
 
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
   let amount1 = convertTokenToDecimal(event.params.amount1, token1.decimals);
 
@@ -80,10 +80,10 @@ export function handleMint(event: MintEvent): void {
   pool.totalValueLockedToken0 = pool.totalValueLockedToken0.plus(amount0);
   pool.totalValueLockedToken1 = pool.totalValueLockedToken1.plus(amount1);
   updateDerivedTVLAmounts(
-    pool,
-    factory,
-    token0,
-    token1,
+    pool as Pool,
+    factory as Factory,
+    token0 as Token,
+    token1 as Token,
     oldPoolTVLETH,
     oldPoolTVLETHUntracked
   );
@@ -154,10 +154,10 @@ export function handleMint(event: MintEvent): void {
   updatePancakeDayData(event);
   updatePoolDayData(event);
   updatePoolHourData(event);
-  updateTokenDayData(token0, event);
-  updateTokenDayData(token1, event);
-  updateTokenHourData(token0, event);
-  updateTokenHourData(token1, event);
+  updateTokenDayData(token0 as Token, event);
+  updateTokenDayData(token1 as Token, event);
+  updateTokenHourData(token0 as Token, event);
+  updateTokenHourData(token1 as Token, event);
 
   token0.save();
   token1.save();
@@ -166,18 +166,18 @@ export function handleMint(event: MintEvent): void {
   mint.save();
 
   // Update inner tick vars and save the ticks
-  updateTickFeeVarsAndSave(lowerTick, event);
-  updateTickFeeVarsAndSave(upperTick, event);
+  updateTickFeeVarsAndSave(lowerTick!, event);
+  updateTickFeeVarsAndSave(upperTick!, event);
 }
 
 export function handleBurn(event: BurnEvent): void {
-  let bundle = Bundle.load("1") as Bundle;
+  let bundle = Bundle.load("1");
   let poolAddress = event.address.toHexString();
-  let pool = Pool.load(poolAddress) as Pool;
-  let factory = Factory.load(FACTORY_ADDRESS) as Factory;
+  let pool = Pool.load(poolAddress);
+  let factory = Factory.load(FACTORY_ADDRESS);
 
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
   let amount1 = convertTokenToDecimal(event.params.amount1, token1.decimals);
 
@@ -199,10 +199,10 @@ export function handleBurn(event: BurnEvent): void {
   pool.totalValueLockedToken0 = pool.totalValueLockedToken0.minus(amount0);
   pool.totalValueLockedToken1 = pool.totalValueLockedToken1.minus(amount1);
   updateDerivedTVLAmounts(
-    pool,
-    factory,
-    token0,
-    token1,
+    pool as Pool,
+    factory as Factory,
+    token0 as Token,
+    token1 as Token,
     oldPoolTotalValueLockedETH,
     oldPoolTVLETHUntracked
   );
@@ -238,8 +238,8 @@ export function handleBurn(event: BurnEvent): void {
   // tick entities
   let lowerTickId = poolAddress + "#" + BigInt.fromI32(event.params.tickLower).toString();
   let upperTickId = poolAddress + "#" + BigInt.fromI32(event.params.tickUpper).toString();
-  let lowerTick = Tick.load(lowerTickId) as Tick;
-  let upperTick = Tick.load(upperTickId) as Tick;
+  let lowerTick = Tick.load(lowerTickId);
+  let upperTick = Tick.load(upperTickId);
   let amount = event.params.amount;
   lowerTick.liquidityGross = lowerTick.liquidityGross.minus(amount);
   lowerTick.liquidityNet = lowerTick.liquidityNet.minus(amount);
@@ -249,12 +249,12 @@ export function handleBurn(event: BurnEvent): void {
   updatePancakeDayData(event);
   updatePoolDayData(event);
   updatePoolHourData(event);
-  updateTokenDayData(token0, event);
-  updateTokenDayData(token1, event);
-  updateTokenHourData(token0, event);
-  updateTokenHourData(token1, event);
-  updateTickFeeVarsAndSave(lowerTick, event);
-  updateTickFeeVarsAndSave(upperTick, event);
+  updateTokenDayData(token0 as Token, event);
+  updateTokenDayData(token1 as Token, event);
+  updateTokenHourData(token0 as Token, event);
+  updateTokenHourData(token1 as Token, event);
+  updateTickFeeVarsAndSave(lowerTick!, event);
+  updateTickFeeVarsAndSave(upperTick!, event);
 
   token0.save();
   token1.save();
@@ -264,17 +264,17 @@ export function handleBurn(event: BurnEvent): void {
 }
 
 export function handleSwap(event: SwapEvent): void {
-  let bundle = Bundle.load("1") as Bundle;
-  let factory = Factory.load(FACTORY_ADDRESS) as Factory;
-  let pool = Pool.load(event.address.toHexString()) as Pool;
+  let bundle = Bundle.load("1");
+  let factory = Factory.load(FACTORY_ADDRESS);
+  let pool = Pool.load(event.address.toHexString());
 
   // // hot fix for bad pricing
   // if (pool.id == "0x9663f2ca0454accad3e094448ea6f77443880454") {
   //   return;
   // }
 
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
 
   let oldTick = pool.tick!;
 
@@ -287,16 +287,16 @@ export function handleSwap(event: SwapEvent): void {
   // need absolute amounts for volume
   let amount0Abs = amount0.times(BigDecimal.fromString(amount0.lt(ZERO_BD) ? "-1" : "1"));
   let amount1Abs = amount1.times(BigDecimal.fromString(amount1.lt(ZERO_BD) ? "-1" : "1"));
-  let volumeAmounts: AmountType = getAdjustedAmounts(amount0Abs, token0, amount1Abs, token1);
+  let volumeAmounts: AmountType = getAdjustedAmounts(amount0Abs, token0 as Token, amount1Abs, token1 as Token);
   let volumeETH = volumeAmounts.eth.div(TWO_BD);
   let volumeUSD = volumeAmounts.usd.div(TWO_BD);
   let volumeUSDUntracked = volumeAmounts.usdUntracked.div(TWO_BD);
 
   let protocolFeeAmounts: AmountType = getAdjustedAmounts(
     protocolFeeAmount0,
-    token0,
+    token0 as Token,
     protocolFeeAmount1,
-    token1
+    token1 as Token
   );
 
   let feesETH = volumeETH.times(pool.feeTier.toBigDecimal()).div(BigDecimal.fromString("1000000"));
@@ -344,7 +344,7 @@ export function handleSwap(event: SwapEvent): void {
   token1.txCount = token1.txCount.plus(ONE_BI);
 
   // updated pool ratess
-  let prices = sqrtPriceX96ToTokenPrices(pool.sqrtPrice, token0, token1);
+  let prices = sqrtPriceX96ToTokenPrices(pool.sqrtPrice, token0 as Token, token1 as Token);
   pool.token0Price = prices[0];
   pool.token1Price = prices[1];
   pool.save();
@@ -354,8 +354,8 @@ export function handleSwap(event: SwapEvent): void {
   // update USD pricing
   bundle.ethPriceUSD = getEthPriceInUSD();
   bundle.save();
-  token0.derivedETH = findEthPerToken(token0);
-  token1.derivedETH = findEthPerToken(token1);
+  token0.derivedETH = findEthPerToken(token0 as Token);
+  token1.derivedETH = findEthPerToken(token1 as Token);
 
   let transaction = loadTransaction(event);
 
@@ -378,10 +378,10 @@ export function handleSwap(event: SwapEvent): void {
   token0.totalValueLocked = token0.totalValueLocked.plus(amount0);
   token1.totalValueLocked = token1.totalValueLocked.plus(amount1);
   updateDerivedTVLAmounts(
-    pool,
-    factory,
-    token0,
-    token1,
+    pool as Pool,
+    factory as Factory,
+    token0 as Token,
+    token1 as Token,
     oldPoolTVLETH,
     oldPoolTVLETHUntracked
   );
@@ -415,10 +415,10 @@ export function handleSwap(event: SwapEvent): void {
   let pancakeDayData = updatePancakeDayData(event);
   let poolDayData = updatePoolDayData(event);
   let poolHourData = updatePoolHourData(event);
-  let token0DayData = updateTokenDayData(token0, event);
-  let token1DayData = updateTokenDayData(token1, event);
-  let token0HourData = updateTokenHourData(token0, event);
-  let token1HourData = updateTokenHourData(token1, event);
+  let token0DayData = updateTokenDayData(token0 as Token, event);
+  let token1DayData = updateTokenDayData(token1 as Token, event);
+  let token0HourData = updateTokenHourData(token0 as Token, event);
+  let token1HourData = updateTokenHourData(token1 as Token, event);
 
   // update volume metrics
   pancakeDayData.volumeETH = pancakeDayData.volumeETH.plus(volumeETH);
@@ -507,7 +507,7 @@ export function handleSwap(event: SwapEvent): void {
 
 export function handleFlash(event: FlashEvent): void {
   // update fee growth
-  let pool = Pool.load(event.address.toHexString()) as Pool;
+  let pool = Pool.load(event.address.toHexString());
   let poolContract = PoolABI.bind(event.address);
   let feeGrowthGlobal0X128 = poolContract.feeGrowthGlobal0X128();
   let feeGrowthGlobal1X128 = poolContract.feeGrowthGlobal1X128();
@@ -525,23 +525,23 @@ function updateTickFeeVarsAndSave(tick: Tick, event: ethereum.Event): void {
   tick.feeGrowthOutside1X128 = tickResult.value3;
   tick.save();
 
-  updateTickDayData(tick, event);
+  updateTickDayData(tick!, event);
 }
 
 function loadTickUpdateFeeVarsAndSave(tickId: i32, event: ethereum.Event): void {
   let poolAddress = event.address;
   let tick = Tick.load(poolAddress.toHexString().concat("#").concat(tickId.toString()));
   if (tick !== null) {
-    updateTickFeeVarsAndSave(tick, event);
+    updateTickFeeVarsAndSave(tick!, event);
   }
 }
 
 export function handleCollect(event: CollectEvent): void {
   // update fee growth
-  let pool = Pool.load(event.address.toHexString()) as Pool;
-  let factory = Factory.load(FACTORY_ADDRESS) as Factory;
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let pool = Pool.load(event.address.toHexString());
+  let factory = Factory.load(FACTORY_ADDRESS);
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
   let transaction = loadTransaction(event);
 
   // Get formatted amounts collected.
@@ -550,9 +550,9 @@ export function handleCollect(event: CollectEvent): void {
   let amounts: AmountType = getAdjustedAmounts(
     // Used for USD in Collect event.
     amount0,
-    token0,
+    token0 as Token,
     amount1,
-    token1
+    token1 as Token
   );
 
   // commented to avoid double counting as burn event is emitted with same amount
@@ -598,10 +598,10 @@ export function handleCollect(event: CollectEvent): void {
 
 export function handleCollectProtocol(event: CollectProtocolEvent): void {
   // update fee growth
-  let pool = Pool.load(event.address.toHexString()) as Pool;
-  let factory = Factory.load(FACTORY_ADDRESS) as Factory;
-  let token0 = Token.load(pool.token0) as Token;
-  let token1 = Token.load(pool.token1) as Token;
+  let pool = Pool.load(event.address.toHexString());
+  let factory = Factory.load(FACTORY_ADDRESS);
+  let token0 = Token.load(pool.token0);
+  let token1 = Token.load(pool.token1);
 
   // Get formatted amounts collected.
   let amount0 = convertTokenToDecimal(event.params.amount0, token0.decimals);
@@ -615,10 +615,10 @@ export function handleCollectProtocol(event: CollectProtocolEvent): void {
   token0.totalValueLocked = token0.totalValueLocked.minus(amount0);
   token1.totalValueLocked = token1.totalValueLocked.minus(amount1);
   updateDerivedTVLAmounts(
-    pool,
-    factory,
-    token0,
-    token1,
+    pool as Pool,
+    factory as Factory,
+    token0 as Token,
+    token1 as Token,
     oldPoolTVLETH,
     oldPoolTVLETHUntracked
   );
