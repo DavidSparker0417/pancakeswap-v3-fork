@@ -64,7 +64,7 @@ export const getBlocksFromTimestamps = async (
     multiChainBlocksClient[chainName],
     skipCount,
   )
-  console.log(`[DAVID] getBlocksFromTimestamps::  fetchedData = ${JSON.stringify(fetchedData)}`)
+  // console.log(`[DAVID] getBlocksFromTimestamps::  fetchedData = ${JSON.stringify(fetchedData)}`)
   const blocks: Block[] = []
   if (fetchedData) {
     // eslint-disable-next-line no-restricted-syntax

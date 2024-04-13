@@ -6,7 +6,7 @@ const requestWithTimeout = <T>(
   variables?: any,
   timeout = 30000,
 ): Promise<T> => {
-  console.log(`[DAVID] GRAPHQL requestWithTimeout:: query = ${request}`)
+  // console.log(`[DAVID] GRAPHQL requestWithTimeout:: query = ${request}`)
   return Promise.race([
     variables ? graphQLClient.request<T>(request, variables) : graphQLClient.request<T>(request),
     new Promise((_, reject) => {

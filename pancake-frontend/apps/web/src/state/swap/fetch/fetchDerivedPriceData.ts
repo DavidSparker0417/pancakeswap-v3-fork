@@ -115,7 +115,7 @@ const getTokenDerivedUSDCPrices = async (tokenAddress: string, blocks: Block[], 
   }
 
   const prices = mapValues(rawPrices, (value) => {
-    return value.derivedUSD
+    return value?.derivedUSD // [DAVID]
   })
 
   // format token BNB price results
