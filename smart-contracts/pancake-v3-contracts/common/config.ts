@@ -53,6 +53,15 @@ export const configs = {
     cake: '0xd9Ba470d5f78AD614aF2B6fa1c73e54b3dBa53cb',
     smartRouterHelper: '0xE8A35726876Dc7735391E0B93ac4D733634591AB',
   },
+  mumbai: {
+    WNATIVE: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
+    nativeCurrencyLabel: 'WMATIC',
+    v2Factory: '??',
+    stableFactory: '??',
+    stableInfo: '??',
+    cake: '??',
+    smartRouterHelper: '??',
+  },
   hardhat: {
     WNATIVE: '0x0000000000000000000000000000000000000000',
     nativeCurrencyLabel: 'BNB',
