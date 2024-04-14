@@ -113,7 +113,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-countup": "^6.4.0",
     "react-datepicker": "^4.8.0",
-    "react-device-detect": "^2.1.2",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.0",
     "react-redux": "^8.0.5",
