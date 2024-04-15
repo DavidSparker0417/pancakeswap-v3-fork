@@ -1,0 +1,83 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract IPancakeStableSwapInfo",
+        "name": "_twoPoolInfo",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IPancakeStableSwapInfo",
+        "name": "_threePoolInfo",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_swap",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "i",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "j",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dy",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "max_dx",
+        "type": "uint256"
+      }
+    ],
+    "name": "get_dx",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "dx",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "threePoolInfo",
+    "outputs": [
+      {
+        "internalType": "contract IPancakeStableSwapInfo",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "twoPoolInfo",
+    "outputs": [
+      {
+        "internalType": "contract IPancakeStableSwapInfo",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
