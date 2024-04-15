@@ -1,6 +1,8 @@
 import { ethers, network, run } from "hardhat";
 
-const main = async () => {
+const FEE_SETTER = "0x24ef62f5060D6BcAB0f0732B515137C508499126"
+
+const deploy = async (): Promise<string> => {
   // Compile contracts
   await run("compile");
   console.log("Compiled contracts.");
@@ -12,10 +14,8 @@ const main = async () => {
     if (!process.env.KEY_MAINNET) {
       throw new Error("Missing private key, refer to README 'Deployment' section");
     }
-  } else if (networkName === "testnet") {
-    if (!process.env.KEY_TESTNET) {
-      throw new Error("Missing private key, refer to README 'Deployment' section");
-    }
+  } else if (!process.env.KEY_TESTNET) {
+    throw new Error("Missing private key, refer to README 'Deployment' section");
   }
 
   console.log("Deploying to network:", networkName);
@@ -25,13 +25,28 @@ const main = async () => {
 
   const PancakeFactory = await ethers.getContractFactory("PancakeFactory");
 
-  const pancackeFactory = await PancakeFactory.deploy(
-    "0x24ef62f5060D6BcAB0f0732B515137C508499126"
-  );
+  const pancackeFactory = await PancakeFactory.deploy(FEE_SETTER);
 
   await pancackeFactory.deployed();
 
   console.log("PancackeFactory deployed to:", pancackeFactory.address);
+  return pancackeFactory.address;
+}
+
+const verify = async (address:string, parameter:any[] = []) => {
+  console.log(`Veryfing ${address} ...`)
+  await run('verify:verify', {
+    address: address,
+    constructorArguments: parameter
+  })
+  console.log("Success!")
+}
+
+const main = async () => {
+  const contractAddr = await deploy();
+  await verify(
+  contractAddr, 
+  [FEE_SETTER]);
 };
 
 main()

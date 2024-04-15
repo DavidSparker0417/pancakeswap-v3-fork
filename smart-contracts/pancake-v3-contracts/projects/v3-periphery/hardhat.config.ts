@@ -94,6 +94,11 @@ const mumbai: NetworkUserConfig = {
   accounts: [process.env.KEY_PULSE_TESTNET!],
 }
 
+const holesky: NetworkUserConfig = {
+  url: 'https://ethereum-holesky-rpc.publicnode.com',
+  chainId: 17000,
+  accounts: [process.env.KEY_TESTNET!],
+}
 export default {
   networks: {
     hardhat: {
@@ -106,14 +111,16 @@ export default {
     ...(process.env.KEY_PULSE_TESTNET && {pulseTestnet}),
     ...(process.env.KEY_TESTNET && { sepolia }),
     ...(process.env.KEY_TESTNET && { mumbai }),
+    ...(process.env.KEY_TESTNET && { holesky }),
     // mainnet: bscMainnet,
   },
   etherscan: {
     apiKey: {
-      bsctestnet: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
-      bsc: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      bsctestnet: process.env.BSCSCAN_API_KEY,
+      bsc: process.env.BSCSCAN_API_KEY,
       pulseTestnet: "0000000000000000000000000000000000",
-      mumbai: "KMUEE12BAEC489N8J76FKZYA7ZKNRQMVZ4",
+      mumbai: process.env.MUMBAI_API_KEY,
+      holesky: process.env.ETHERSCAN_API_KEY
     },
     customChains: [
       {

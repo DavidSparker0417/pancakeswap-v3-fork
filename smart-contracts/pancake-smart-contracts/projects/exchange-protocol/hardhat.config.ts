@@ -6,6 +6,7 @@ import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
 import "solidity-coverage";
 import "dotenv/config";
+import '@nomicfoundation/hardhat-verify'
 require('dotenv').config({ path: require('find-config')('.env') })
 
 const bscTestnet: NetworkUserConfig = {
@@ -33,8 +34,14 @@ const sepolia: NetworkUserConfig = {
 }
 
 const mumbai: NetworkUserConfig = {
-  url: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
+  url: 'https://polygon-mumbai-bor-rpc.publicnode.com',
   chainId: 80001,
+  accounts: [process.env.KEY_TESTNET!],
+}
+
+const holesky: NetworkUserConfig = {
+  url: 'https://ethereum-holesky-rpc.publicnode.com',
+  chainId: 17000,
   accounts: [process.env.KEY_TESTNET!],
 }
 
@@ -42,17 +49,19 @@ const config = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
-    testnet: mumbai,
-    // testnet: bscTestnet,
-    // testnet: pulseTestnet,
+    ...({ sepolia }),
+    ...({ holesky }),
     // mainnet: bscMainnet,
   },
+
   etherscan: {
     apiKey: {
+      mainnet: "2VPQC6NNB1AEJI2P3GQA73C9UZ823EFY3F",
       bsctestnet: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
       bsc: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
       pulseTestnet: "0000000000000000000000000000000000",
       mumbai: "KMUEE12BAEC489N8J76FKZYA7ZKNRQMVZ4",
+      holesky: "2VPQC6NNB1AEJI2P3GQA73C9UZ823EFY3F"
     },
     customChains: [
       {
@@ -88,6 +97,11 @@ const config = {
         }
       },
     ]
+  },
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: true
   },
   solidity: {
     compilers: [

@@ -62,6 +62,15 @@ export const configs = {
     cake: '??',
     smartRouterHelper: '??',
   },
+  holesky: {
+    WNATIVE: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
+    nativeCurrencyLabel: 'WMATIC',
+    v2Factory: '0x6391CFBF229cC6e1Ac657deEcc6C0381B4380110',
+    stableFactory: '??',
+    stableInfo: '??',
+    cake: '??',
+    smartRouterHelper: '??',
+  },
   hardhat: {
     WNATIVE: '0x0000000000000000000000000000000000000000',
     nativeCurrencyLabel: 'BNB',

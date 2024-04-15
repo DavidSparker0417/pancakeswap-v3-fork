@@ -20,6 +20,7 @@
     "@uniswap/lib": "4.0.1-alpha"
   },
   "dependencies": {
+    "@nomicfoundation/hardhat-verify": "^2.0.5",
     "find-config": "^1.0.0"
   }
 }

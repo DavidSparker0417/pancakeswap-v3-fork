@@ -25,6 +25,8 @@ const BasicChart = ({
     currentSwapPrice,
   })
 
+  console.log(`[DAVID] BASIC CHART:: pairPrices = ${pairPrices}`)
+
   const [hoverValue, setHoverValue] = useState<number | undefined>()
   const [hoverDate, setHoverDate] = useState<string | undefined>()
   const valueToDisplay = hoverValue || pairPrices[pairPrices.length - 1]?.value
