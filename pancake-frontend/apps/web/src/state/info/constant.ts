@@ -119,6 +119,7 @@ export const multiChainQueryClient = {
 export const multiChainQueryStableClient = {
   BSC: infoStableSwapClients[ChainId.BSC],
   ARB: infoStableSwapClients[ChainId.ARBITRUM_ONE],
+  PULSE_TESTNET: infoStableSwapClients[ChainId.PULSE_TESTNET],
 }
 
 export const STABLESWAP_SUBGRAPHS_START_BLOCK = {

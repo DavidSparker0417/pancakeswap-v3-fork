@@ -70,6 +70,7 @@ export const v2Clients = {
 export const infoStableSwapClients = {
   [ChainId.BSC]: new GraphQLClient(STABLESWAP_SUBGRAPHS[ChainId.BSC]),
   [ChainId.ARBITRUM_ONE]: new GraphQLClient(STABLESWAP_SUBGRAPHS[ChainId.ARBITRUM_ONE]),
+  [ChainId.PULSE_TESTNET]: new GraphQLClient(STABLESWAP_SUBGRAPHS[ChainId.PULSE_TESTNET]),
 }
 
 export const infoServerClient = new GraphQLClient(INFO_CLIENT, {
