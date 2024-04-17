@@ -25,7 +25,6 @@ import { useAccount } from 'wagmi'
 import ClaimYourNFT from './ClaimYourNFT'
 import ProfileUserMenuItem from './ProfileUserMenuItem'
 import WalletModal, { WalletView } from './WalletModal'
-import WalletUserMenuItem from './WalletUserMenuItem'
 
 const UserMenuItems = () => {
   const { t } = useTranslation()
@@ -51,7 +50,7 @@ const UserMenuItems = () => {
 
   return (
     <>
-      <WalletUserMenuItem isWrongNetwork={isWrongNetwork} onPresentWalletModal={onClickWalletMenu} />
+      {/* <WalletUserMenuItem isWrongNetwork={isWrongNetwork} onPresentWalletModal={onClickWalletMenu} /> */}
       <UserMenuItem as="button" disabled={isWrongNetwork} onClick={onPresentTransactionModal}>
         {t('Recent Transactions')}
         {hasPendingTransactions && <RefreshIcon spin />}

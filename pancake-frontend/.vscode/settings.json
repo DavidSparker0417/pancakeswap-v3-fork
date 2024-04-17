@@ -49,5 +49,8 @@
     "WBETH",
     "wbnb",
     "ZKSYNC"
-  ]
+  ],
+  "[yaml]": {
+    "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  }
 }

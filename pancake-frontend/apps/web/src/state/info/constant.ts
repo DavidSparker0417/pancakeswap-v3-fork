@@ -20,9 +20,9 @@ import {
   TOKEN_BLACKLIST,
 } from 'config/constants/info'
 import mapValues from 'lodash/mapValues'
-import { arbitrum, base, bsc, linea, mainnet, opBNB, polygonZkEvm, zkSync } from 'wagmi/chains'
+import { arbitrum, base, bsc, linea, mainnet, opBNB, polygonZkEvm, pulsechainV4, zkSync } from 'wagmi/chains'
 
-export type MultiChainName = 'BSC' | 'ETH' | 'POLYGON_ZKEVM' | 'ZKSYNC' | 'ARB' | 'LINEA' | 'BASE' | 'OPBNB'
+export type MultiChainName = 'BSC' | 'ETH' | 'POLYGON_ZKEVM' | 'ZKSYNC' | 'ARB' | 'LINEA' | 'BASE' | 'OPBNB' | 'PULSE_TESTNET'
 
 export type MultiChainNameExtend = MultiChainName | 'BSC_TESTNET' | 'ZKSYNC_TESTNET' | 'PULSE_TESTNET'
 
@@ -52,6 +52,7 @@ export const multiChainQueryMainToken: Record<MultiChainName, string> = {
   LINEA: 'ETH',
   BASE: 'ETH',
   OPBNB: 'ETH',
+  PULSE_TESTNET: 'tPLS'
 }
 
 export const multiChainBlocksClient: Record<MultiChainNameExtend, string> = {
@@ -88,6 +89,7 @@ export const multiChainId: Record<MultiChainName, ChainId> = {
   LINEA: ChainId.LINEA,
   BASE: ChainId.BASE,
   OPBNB: ChainId.OPBNB,
+  PULSE_TESTNET: ChainId.PULSE_TESTNET
 }
 
 export const multiChainPaths = {
@@ -99,6 +101,7 @@ export const multiChainPaths = {
   [ChainId.LINEA]: '/linea',
   [ChainId.BASE]: '/base',
   [ChainId.OPBNB]: '/opbnb',
+  [ChainId.PULSE_TESTNET]: '/pulseTestnet',
 }
 
 export const multiChainQueryClient = {
@@ -131,6 +134,7 @@ export const multiChainScan: Record<MultiChainName, string> = {
   LINEA: linea.blockExplorers.default.name,
   BASE: base.blockExplorers.default.name,
   OPBNB: opBNB.blockExplorers.default.name,
+  PULSE_TESTNET: pulsechainV4.blockExplorers.default.name
 }
 
 export const multiChainTokenBlackList: Record<MultiChainName, string[]> = mapValues(
@@ -143,6 +147,7 @@ export const multiChainTokenBlackList: Record<MultiChainName, string[]> = mapVal
     LINEA: ['0x'],
     BASE: ['0x'],
     OPBNB: ['0x'],
+    PULSE_TESTNET: ['0x'],
   },
   (val) => val.map((address) => address.toLowerCase()),
 )
@@ -157,6 +162,7 @@ export const multiChainTokenWhiteList: Record<MultiChainName, string[]> = mapVal
     LINEA: [],
     BASE: [],
     OPBNB: [],
+    PULSE_TESTNET: [],
   },
   (val) => val.map((address) => address.toLowerCase()),
 )

@@ -78,6 +78,5 @@ export const getBlocksFromTimestamps = async (
     // graphql-request does not guarantee same ordering of batched requests subqueries, hence manual sorting
     return orderBy(blocks, (block) => block.number, sortDirection)
   }
-  console.log(`[DAVID] getBlocksFromTimestamps::  blocks = ${JSON.stringify(blocks)}`)
   return blocks
 }

@@ -38,6 +38,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
   const { t } = useTranslation()
   const [showTestnet] = useUserShowTestnet()
 
+
   return (
     <>
       <Box px="16px" py="8px">
@@ -46,6 +47,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
       <UserMenuDivider />
       {chains
         .filter((chain) => {
+          if (chain.id === ChainId.PULSE_TESTNET) return true // [DAVID]
           if (chain.id === chainId) return true
           if ('testnet' in chain && chain.testnet) {
             return showTestnet
@@ -198,7 +200,10 @@ export const NetworkSwitcher = () => {
         mr="8px"
         placement="bottom"
         variant={isLoading ? 'pending' : isWrongNetwork ? 'danger' : 'default'}
-        avatarSrc={`${ASSET_CDN}/web/chains/${chainId}.png`}
+        avatarSrc={chainId === ChainId.PULSE_TESTNET
+          ? "pulse.svg" :
+          `${ASSET_CDN}/web/chains/${chainId}.png`
+        } // [DAVID]
         disabled={cannotChangeNetwork}
         text={
           isLoading ? (
