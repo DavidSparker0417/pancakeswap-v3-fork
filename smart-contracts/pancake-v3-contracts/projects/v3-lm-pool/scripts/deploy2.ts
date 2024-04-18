@@ -22,7 +22,7 @@ async function main() {
 
   const pancakeV3Factory_address = v3DeployedContracts.PancakeV3Factory
 
-  let pancakeV3LmPoolDeployer_addr = '0xe244dF73e3b0574Dd4cC88d9eA58bb1f4C81e30A'
+  let pancakeV3LmPoolDeployer_addr = ''
   if (!pancakeV3LmPoolDeployer_addr) {
     const PancakeV3LmPoolDeployer = await ethers.getContractFactory('PancakeV3LmPoolDeployer')
     const pancakeV3LmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
