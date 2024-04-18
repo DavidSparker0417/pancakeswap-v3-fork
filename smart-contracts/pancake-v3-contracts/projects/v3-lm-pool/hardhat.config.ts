@@ -1,9 +1,10 @@
 import { HardhatUserConfig } from 'hardhat/config'
-import '@nomicfoundation/hardhat-toolbox'
+import "@nomiclabs/hardhat-ethers";
+import '@nomicfoundation/hardhat-verify';
 import '@typechain/hardhat'
-import 'dotenv/config'
 import { NetworkUserConfig } from 'hardhat/types'
 import 'solidity-docgen';
+import "dotenv/config";
 require('dotenv').config({ path: require('find-config')('.env') })
 
 const bscTestnet: NetworkUserConfig = {
@@ -36,7 +37,13 @@ const pulseTestnet: NetworkUserConfig = {
   accounts: [process.env.KEY_PULSE_TESTNET!],
 }
 
-const config: HardhatUserConfig = {
+const holesky: NetworkUserConfig = {
+  url: 'https://ethereum-holesky-rpc.publicnode.com',
+  chainId: 17000,
+  accounts: [process.env.KEY_TESTNET!],
+}
+
+const config = {
   solidity: {
     version: '0.7.6',
   },
@@ -47,12 +54,15 @@ const config: HardhatUserConfig = {
     ...(process.env.KEY_GOERLI && { goerli }),
     ...(process.env.KEY_ETH && { eth }),
     ...(process.env.KEY_PULSE_TESTNET && {pulseTestnet}),
+    ...(process.env.KEY_TESTNET && {holesky}),
   },
   etherscan: {
     apiKey: {
-      bsctestnet: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
-      bsc: "HDCD9C44C7YRZGHE48WGHGUZW5DU1R2WKT",
+      bsctestnet: process.env.BSCSCAN_API_KEY,
+      bsc: process.env.BSCSCAN_API_KEY,
       pulseTestnet: "0000000000000000000000000000000000",
+      mumbai: process.env.MUMBAI_API_KEY,
+      holesky: process.env.ETHERSCAN_API_KEY
     },
     customChains: [
       {
@@ -77,6 +87,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.scan.pulsechain.com/api",
           browserURL: "https://rpc.v4.testnet.pulsechain.com"
+        }
+      },
+      {
+        network: "mumbai",
+        chainId: 80001,
+        urls: {
+          apiURL: "https://api-testnet.polygonscan.com/api",
+          browserURL: "https://mumbai.polygonscan.com/"
         }
       },
     ]

@@ -1,10 +1,11 @@
 import { ethers, network } from 'hardhat'
 import { configs } from '@pancakeswap/common/config'
-import { tryVerify } from '@pancakeswap/common/verify'
+import { verifyContract } from '@pancakeswap/common/verify'
 import fs from 'fs'
 import { abi } from '@pancakeswap/v3-core/artifacts/contracts/PancakeV3Factory.sol/PancakeV3Factory.json'
 
 import { parseEther } from 'ethers/lib/utils'
+import { sleep } from '@pancakeswap/common/sleep'
 const currentNetwork = network.name
 
 async function main() {
@@ -21,17 +22,23 @@ async function main() {
 
   const pancakeV3Factory_address = v3DeployedContracts.PancakeV3Factory
 
-  const PancakeV3LmPoolDeployer = await ethers.getContractFactory('PancakeV3LmPoolDeployer')
-  const pancakeV3LmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
+  let pancakeV3LmPoolDeployer_addr = '0xe244dF73e3b0574Dd4cC88d9eA58bb1f4C81e30A'
+  if (!pancakeV3LmPoolDeployer_addr) {
+    const PancakeV3LmPoolDeployer = await ethers.getContractFactory('PancakeV3LmPoolDeployer')
+    const pancakeV3LmPoolDeployer = await PancakeV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
+    await pancakeV3LmPoolDeployer.deployed();
+    pancakeV3LmPoolDeployer_addr = pancakeV3LmPoolDeployer.address;
+  }
 
-  console.log('pancakeV3LmPoolDeployer deployed to:', pancakeV3LmPoolDeployer.address)
-
+  console.log('pancakeV3LmPoolDeployer deployed to:', pancakeV3LmPoolDeployer_addr)
+  await sleep(10000);
+  await verifyContract(pancakeV3LmPoolDeployer_addr, [mcV3DeployedContracts.MasterChefV3])
   const pancakeV3Factory = new ethers.Contract(pancakeV3Factory_address, abi, owner)
 
-  await pancakeV3Factory.setLmPoolDeployer(pancakeV3LmPoolDeployer.address)
+  await pancakeV3Factory.setLmPoolDeployer(pancakeV3LmPoolDeployer_addr)
 
   const contracts = {
-    PancakeV3LmPoolDeployer: pancakeV3LmPoolDeployer.address,
+    PancakeV3LmPoolDeployer: pancakeV3LmPoolDeployer_addr,
   }
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))
 }

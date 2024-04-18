@@ -68,7 +68,7 @@ export const configs = {
     v2Factory: '0x6391CFBF229cC6e1Ac657deEcc6C0381B4380110',
     stableFactory: '0xE8A35726876Dc7735391E0B93ac4D733634591AB',
     stableInfo: '0x5D4931845A6B082AC4581962Fb3238cB417D7223',
-    cake: '??',
+    cake: '0x19222BD13D6a3DBD56b0c8381A04a10cA9e461DF',
     smartRouterHelper: '0x5e85B7e1a2133E42Ce4660A23F02cc176B21e394',
   },
   hardhat: {

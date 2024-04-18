@@ -1,11 +1,12 @@
 import type { HardhatUserConfig, NetworkUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
+import '@nomicfoundation/hardhat-verify'
 import "@nomiclabs/hardhat-web3";
 import "@nomiclabs/hardhat-truffle5";
 import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
 import "solidity-coverage";
-import "dotenv/config";
+require('dotenv').config({ path: require('find-config')('.env') })
 
 const bscTestnet: NetworkUserConfig = {
   url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
@@ -31,14 +32,64 @@ const sepolia: NetworkUserConfig = {
   accounts: [process.env.KEY_TESTNET!],
 }
 
-const config: HardhatUserConfig = {
+const holesky: NetworkUserConfig = {
+  url: 'https://ethereum-holesky-rpc.publicnode.com',
+  chainId: 17000,
+  accounts: [process.env.KEY_TESTNET!],
+}
+
+const config = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
     sepolia: sepolia,
+    ...{holesky}
     // pulseTestnet: pulseTestnet,
     // testnet: bscTestnet,
     // mainnet: bscMainnet,
+  },
+  etherscan: {
+    apiKey: {
+      bsctestnet: process.env.BSCSCAN_API_KEY,
+      bsc: process.env.BSCSCAN_API_KEY,
+      pulseTestnet: "0000000000000000000000000000000000",
+      mumbai: process.env.MUMBAI_API_KEY,
+      holesky: process.env.ETHERSCAN_API_KEY
+    },
+    customChains: [
+      {
+        network: "bsctestnet",
+        chainId: 97,
+        urls: {
+          apiURL: "https://api-testnet.bscscan.com/api",
+          browserURL: "https://testnet.bscscan.com"
+        }
+      },
+      {
+        network: "bsc",
+        chainId: 56,
+        urls: {
+          apiURL: "https://api.bscscan.com/api",
+          browserURL: "https://bscscan.com"
+        }
+      },
+      {
+        network: "pulseTestnet",
+        chainId: 943,
+        urls: {
+          apiURL: "https://api.scan.pulsechain.com/api",
+          browserURL: "https://rpc.v4.testnet.pulsechain.com"
+        }
+      },
+      {
+        network: "mumbai",
+        chainId: 80001,
+        urls: {
+          apiURL: "https://api-testnet.polygonscan.com/api",
+          browserURL: "https://mumbai.polygonscan.com/"
+        }
+      },
+    ]
   },
   solidity: {
     version: "0.6.12",

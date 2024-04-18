@@ -5,6 +5,7 @@ export default {
     testnet: "0x24ef62f5060D6BcAB0f0732B515137C508499126",
     pulseTestnet: "0x24ef62f5060D6BcAB0f0732B515137C508499126",
     sepolia: "0x24ef62f5060D6BcAB0f0732B515137C508499126",
+    holesky: "0x24ef62f5060D6BcAB0f0732B515137C508499126",
   },
   CakeVault: {
     mainnet: "0xa80240eb5d7e05d3f250cf000eec0891d00b51cc",
@@ -16,6 +17,7 @@ export default {
     testnet: "0x27e0C3c11F2184C323d8c16129b3A26CC5c7b382",
     pulseTestnet: "0x27e0C3c11F2184C323d8c16129b3A26CC5c7b382",
     sepolia: "0x27e0C3c11F2184C323d8c16129b3A26CC5c7b382",
+    holesky: "0x27e0C3c11F2184C323d8c16129b3A26CC5c7b382",
   },
   MasterChef: {
     // Syrup Pool: Cake Pool

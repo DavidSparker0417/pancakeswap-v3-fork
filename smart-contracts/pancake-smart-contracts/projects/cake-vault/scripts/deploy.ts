@@ -1,6 +1,16 @@
 import { ethers, network, run } from "hardhat";
 import config from "../config";
 import { constants } from "@openzeppelin/test-helpers";
+import { sleep } from "sleep-ts";
+
+const verify = async (address: string, parameter: any[] = []) => {
+  console.log(`Veryfing ${address} ...`)
+  await run('verify:verify', {
+    address: address,
+    constructorArguments: parameter
+  })
+  console.log("Success!")
+}
 
 const main = async () => {
   // Get network name: hardhat, testnet or mainnet.
@@ -27,16 +37,16 @@ const main = async () => {
     }
   }
 
-  console.log("Deploying to network:", network);
+  console.log("Deploying to network:", name);
 
   let cake, syrup, masterchef, admin, treasury;
-
+  let cake_addr, syrup_addr, masterchef_addr
   if (name == "mainnet") {
     admin = config.Admin[name];
     treasury = config.Treasury[name];
-    cake = config.Cake[name];
-    syrup = config.Syrup[name];
-    masterchef = config.MasterChef[name];
+    cake_addr = config.Cake[name];
+    syrup_addr = config.Syrup[name];
+    masterchef_addr = config.MasterChef[name];
   } else {
     console.log("Deploying mocks");
     const CakeContract = await ethers.getContractFactory("CakeToken");
@@ -53,33 +63,57 @@ const main = async () => {
       treasury = config.Treasury[name];
     }
 
-    cake = (await CakeContract.deploy());
-    await cake.deployed();
-    // console.log("[DAVID] Cake deployed to:", cake.address);
-    syrup = (await SyrupContract.deploy(cake.address));
-    await syrup.deployed();
-    // console.log("[DAVID] Syrup deployed to:", syrup.address);
+    cake_addr = ''
+    if (!cake_addr) {
+      cake = (await CakeContract.deploy());
+      await cake.deployed();
+      cake_addr = cake.address
+    }
+    await sleep(10000)
+    await verify(cake_addr)
+    console.log("[DAVID] Cake deployed to:", cake_addr);
 
-    // cake = CakeContract.attach("0xc10afe081bC0daf442c33Ff5B45a3A6EC23E4434");
-    // syrup = SyrupContract.attach("0x5D4931845A6B082AC4581962Fb3238cB417D7223");
-    masterchef = (await MasterChefContract.deploy(cake.address, syrup.address, admin, ethers.BigNumber.from("1"), currentBlock));
-    await masterchef.deployed();
-    // console.log("[DAVID] MasterChef deployed to:", masterchef.address);
+    syrup_addr = ''
+    if (!syrup_addr) {
+      syrup = (await SyrupContract.deploy(cake_addr));
+      await syrup.deployed();
+      syrup_addr = syrup.address
+    }
+    console.log("[DAVID] Syrup deployed to:", syrup_addr);
+    await sleep(10000);
+    await verify(syrup_addr, [cake_addr]);
 
+    masterchef_addr = ''
+    if (!masterchef_addr) {
+      masterchef = (await MasterChefContract.deploy(cake_addr, syrup_addr, admin, ethers.BigNumber.from("1"), currentBlock));
+      await masterchef.deployed();
+      masterchef_addr = masterchef.address;
+    }
+    console.log("[DAVID] MasterChef deployed to:", masterchef_addr);
+    await sleep(10000);
+    await verify(masterchef_addr, [
+      cake_addr, syrup_addr, admin, ethers.BigNumber.from("1"), currentBlock
+    ])
     console.log("Admin:", admin);
     console.log("Treasury:", treasury);
-    console.log("Cake deployed to:", cake.address);
-    console.log("Syrup deployed to:", syrup.address);
-    console.log("MasterChef deployed to:", masterchef.address);
+    console.log("Cake deployed to:", cake_addr);
+    console.log("Syrup deployed to:", syrup_addr);
+    console.log("MasterChef deployed to:", masterchef_addr);
   }
 
   console.log("Deploying Cake Vault...");
 
-  const CakeVaultContract = await ethers.getContractFactory("CakeVault");
-  const cakeVault = await CakeVaultContract.deploy(cake.address, syrup.address, masterchef.address, admin, treasury);
-  await cakeVault.deployed();
+  let cakeVault_addr = ''
+  if (!cakeVault_addr) {
+    const CakeVaultContract = await ethers.getContractFactory("CakeVault");
+    const cakeVault = await CakeVaultContract.deploy(cake_addr, syrup_addr, masterchef_addr, admin, treasury);
+    await cakeVault.deployed();
+    cakeVault_addr = cakeVault.address
+  }
+  await sleep(10000)
+  await verify(cakeVault_addr, [cake_addr, syrup_addr, masterchef_addr, admin, treasury]);
 
-  console.log("CakeVault deployed to:", cakeVault.address);
+  console.log("CakeVault deployed to:", cakeVault_addr);
 };
 
 main()
