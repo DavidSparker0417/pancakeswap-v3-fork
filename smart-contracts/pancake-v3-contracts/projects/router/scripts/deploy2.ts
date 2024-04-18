@@ -1,6 +1,6 @@
 import { artifacts, ethers, network } from 'hardhat'
 import { configs } from '@pancakeswap/common/config'
-import { tryVerify } from '@pancakeswap/common/verify'
+import { tryVerify, verifyContract } from '@pancakeswap/common/verify'
 import { writeFileSync } from 'fs'
 
 type ContractJson = { abi: any; bytecode: string }
@@ -41,11 +41,11 @@ async function main() {
     SmartRouterHelper = new ethers.Contract(smartRouterHelper_address, artifacts.SmartRouterHelper.abi, owner)
   }
   console.log('SmartRouterHelper deployed to:', smartRouterHelper_address)
-  // await tryVerify(smartRouterHelper)
+  await verifyContract(smartRouterHelper_address)
 
   /** SmartRouter */
   console.log('Deploying SmartRouter...')
-  let smartRouter_address = ''
+  let smartRouter_address = '0xa2Ccb4E30F40644b897bE7f878902e01161DD6c0'
   let SmartRouter
   if (!smartRouter_address) {
     SmartRouter = await ethers.getContractFactory('SmartRouter', {
@@ -69,18 +69,18 @@ async function main() {
   }
   console.log('SmartRouter deployed to:', smartRouter_address)
 
-  // await tryVerify(smartRouter, [
-  //   config.v2Factory,
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
-  //   positionManager_address,
-  //   config.stableFactory,
-  //   config.stableInfo,
-  //   config.WNATIVE,
-  // ])
+  await verifyContract(smartRouter_address, [
+    config.v2Factory,
+    pancakeV3PoolDeployer_address,
+    pancakeV3Factory_address,
+    positionManager_address,
+    config.stableFactory,
+    config.stableInfo,
+    config.WNATIVE,
+  ])
 
   /** MixedRouteQuoterV1 */
-  let mixedRouteQuoterV1_address = ''
+  let mixedRouteQuoterV1_address = '0xf22ab94Da7927c30Ec4B6fca616eab677AEA69De'
   let MixedRouteQuoterV1
   if (!mixedRouteQuoterV1_address) {
     MixedRouteQuoterV1 = await ethers.getContractFactory('MixedRouteQuoterV1', {
@@ -102,16 +102,16 @@ async function main() {
   }
   console.log('MixedRouteQuoterV1 deployed to:', mixedRouteQuoterV1_address)
 
-  // await tryVerify(mixedRouteQuoterV1, [
-  //   pancakeV3PoolDeployer_address,
-  //   pancakeV3Factory_address,
-  //   config.v2Factory,
-  //   config.stableFactory,
-  //   config.WNATIVE,
-  // ])
+  await verifyContract(mixedRouteQuoterV1_address, [
+    pancakeV3PoolDeployer_address,
+    pancakeV3Factory_address,
+    config.v2Factory,
+    config.stableFactory,
+    config.WNATIVE,
+  ])
 
   /** QuoterV2 */
-  let quoterV2_address = ''
+  let quoterV2_address = '0xB4575fFe6b6c45b025c65C70183097c2b40bb4C2'
   let QuoterV2
   if (!quoterV2_address) {
     QuoterV2 = await ethers.getContractFactory('QuoterV2', {
@@ -127,10 +127,10 @@ async function main() {
   }
   console.log('QuoterV2 deployed to:', quoterV2_address)
 
-  // await tryVerify(quoterV2, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
+  await verifyContract(quoterV2_address, [pancakeV3PoolDeployer_address, pancakeV3Factory_address, config.WNATIVE])
 
   /** TokenValidator */
-  let tokenValidator_address = ''
+  let tokenValidator_address = '0x61E860130f66a479a9C1B337E6f0a3ECeC2ef1f2'
   let TokenValidator
   if (!tokenValidator_address) {
     TokenValidator = await ethers.getContractFactory('TokenValidator', {
@@ -139,12 +139,14 @@ async function main() {
       },
     })
     const tokenValidator = await TokenValidator.deploy(config.v2Factory, positionManager_address)
+    await tokenValidator.deployed()
+    tokenValidator_address = tokenValidator.address
   } else {
     TokenValidator = new ethers.Contract(tokenValidator_address, artifacts.TokenValidator.abi, owner)
   }
   console.log('TokenValidator deployed to:', tokenValidator_address)
 
-  // await tryVerify(tokenValidator, [config.v2Factory, positionManager_address])
+  await verifyContract(tokenValidator_address, [config.v2Factory, positionManager_address])
 
   const contracts = {
     SmartRouter: smartRouter_address,

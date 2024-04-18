@@ -27,7 +27,7 @@ async function main() {
   console.log("Compiled contracts...");
   const [owner] = await ethers.getSigners()
 
-  let pancakeStableInfoFactory_address = '0x5D4931845A6B082AC4581962Fb3238cB417D7223'
+  let pancakeStableInfoFactory_address = ''
   let PancakeStableInfoFactory
   if (!pancakeStableInfoFactory_address) {
     PancakeStableInfoFactory = await ethers.getContractFactory("PancakeStableSwapTwoPoolInfo");
@@ -45,7 +45,7 @@ async function main() {
   await sleep(10000)
   verify(pancakeStableInfoFactory_address)
 
-  let pancakeStableSwapFactory_address = '0xE8A35726876Dc7735391E0B93ac4D733634591AB'
+  let pancakeStableSwapFactory_address = ''
   let PancakeStableSwapFactory
 
   if (!pancakeStableSwapFactory_address) {
@@ -59,7 +59,7 @@ async function main() {
     pancakeStableSwapFactory_address = pancakeStableSwapFactory.address
   } else {
     PancakeStableSwapFactory = new ethers.Contract(
-      pancakeStableInfoFactory_address,
+      pancakeStableSwapFactory_address,
       artifacts.PancakeStableSwapFactory.abi,
       owner
     )

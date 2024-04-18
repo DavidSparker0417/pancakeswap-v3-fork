@@ -66,10 +66,10 @@ export const configs = {
     WNATIVE: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
     nativeCurrencyLabel: 'WMATIC',
     v2Factory: '0x6391CFBF229cC6e1Ac657deEcc6C0381B4380110',
-    stableFactory: '??',
-    stableInfo: '??',
+    stableFactory: '0xE8A35726876Dc7735391E0B93ac4D733634591AB',
+    stableInfo: '0x5D4931845A6B082AC4581962Fb3238cB417D7223',
     cake: '??',
-    smartRouterHelper: '??',
+    smartRouterHelper: '0x5e85B7e1a2133E42Ce4660A23F02cc176B21e394',
   },
   hardhat: {
     WNATIVE: '0x0000000000000000000000000000000000000000',
