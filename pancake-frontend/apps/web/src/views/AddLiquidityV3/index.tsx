@@ -45,6 +45,7 @@ import { V2Selector } from './components/V2Selector'
 import StableFormView from './formViews/StableFormView'
 import V2FormView from './formViews/V2FormView'
 import V3FormView from './formViews/V3FormView'
+import FeeSelector from './formViews/V3FormView/components/FeeSelector'
 import { useCurrencyParams } from './hooks/useCurrencyParams'
 import { HandleFeePoolSelectFn, SELECTOR_TYPE } from './types'
 
@@ -107,7 +108,7 @@ export function UniversalAddLiquidity({
 
   const quoteCurrency =
     baseCurrency && currencyB && baseCurrency.wrapped.equals(currencyB.wrapped) ? undefined : currencyB
-    
+
   const [, , feeAmountFromUrl] = router.query.currency || []
 
   // fee selection from url
@@ -333,7 +334,7 @@ export function UniversalAddLiquidity({
                   />
                 )}
 
-              {/* {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
+              {!stableConfig.stableSwapConfig && selectorType === SELECTOR_TYPE.V3 && (
                 <FeeSelector
                   currencyA={baseCurrency ?? undefined}
                   currencyB={quoteCurrency ?? undefined}
@@ -341,7 +342,7 @@ export function UniversalAddLiquidity({
                   feeAmount={feeAmount}
                   handleSelectV2={() => handleFeePoolSelect({ type: SELECTOR_TYPE.V2 })}
                 />
-              )} */}
+              )}
             </DynamicSection>
           </AutoColumn>
           {selectorType === SELECTOR_TYPE.STABLE && (
