@@ -95,3 +95,7 @@ chain
  	- deploy
  		yarn hardhat run scripts/deploy2.ts --network <target network>
  	- deployed address is saved to "deployment/<target network>.json" file.
+
+ 3. thegraph
+ 	3.1 blocks
+ 	- go to subgraphs/blocks
